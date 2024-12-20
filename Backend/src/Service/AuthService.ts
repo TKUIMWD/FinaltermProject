@@ -95,7 +95,6 @@ export class AuthService extends Service {
                 token
             } as AuthResponse;
             logger.info(`User ${username} logged in`);
-            console.log(resp.body);
             resp.message = "Login succeed";
         } catch (error) {
             resp.code = 500;
