@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "nickname": "ZZY",
+    "title": "首席刷碗師",
+    "intro": "用雙手征服每個碗盤的傳奇人物，據說曾在 20 分鐘內清理過上千個盤子，是洗碗界的活字典。",
+    "seniority": 20,
+    "hourly_rate": 200,
+    "areas": ["北部", "中部", "南部", "東部"]
+  },
+  {
+    "id": 2,
+    "nickname": "LTA",
+    "title": "資深刷碗師",
+    "intro": "高峰時段的救世主，碗盤如流水般來去，LTA 擁有的速度讓洗碗機都甘拜下風。",
+    "seniority": 10,
+    "hourly_rate": 195,
+    "areas": ["北部", "南部"]
+  },
+  {
+    "id": 3,
+    "nickname": "HPW",
+    "title": "見習刷碗師",
+    "intro": "雖然只有一年的經驗，但已經磨練出如侍劍般的洗碗技藝，立志成為碗盤世界的劍豪。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["北部"]
+  },
+  {
+    "id": 4,
+    "nickname": "LCH",
+    "title": "助理刷碗師",
+    "intro": "活動現場的隱形英雄，LCH 總能在碗盤堆成山之前，神不知鬼不覺地讓它們消失。",
+    "seniority": 3,
+    "hourly_rate": 193,
+    "areas": ["中部", "南部"]
+  },
+  {
+    "id": 5,
+    "nickname": "JSM",
+    "title": "資深刷碗師",
+    "intro": "洗碗界的哲學家，15 年的經歷讓 JSM 理解到每個碗的靈魂都值得被珍視。",
+    "seniority": 15,
+    "hourly_rate": 195,
+    "areas": ["中部", "南部"]
+  },
+  {
+    "id": 6,
+    "nickname": "KLP",
+    "title": "資深刷碗師",
+    "intro": "傳說在大停電的晚上，KLP 手動洗掉了整個餐廳的餐具，並成為當地的傳奇人物。",
+    "seniority": 12,
+    "hourly_rate": 195,
+    "areas": ["北部", "中部", "南部", "東部"]
+  },
+  {
+    "id": 7,
+    "nickname": "QWE",
+    "title": "資深刷碗師",
+    "intro": "北部與東部的雙區霸主，每到高峰時段，他總能冷靜應對，據說還能邊洗碗邊哼歌。",
+    "seniority": 20,
+    "hourly_rate": 200,
+    "areas": ["北部", "東部"]
+  },
+  {
+    "id": 8,
+    "nickname": "RTY",
+    "title": "資深刷碗師",
+    "intro": "號稱洗碗界的蜘蛛俠，RTY 在全台地區穿梭，快速解救餐廳的「碗」境。",
+    "seniority": 18,
+    "hourly_rate": 200,
+    "areas": ["北部", "中部", "南部", "東部"]
+  },
+  {
+    "id": 9,
+    "nickname": "UIO",
+    "title": "資深刷碗師",
+    "intro": "14 年來致力於用雙手打造「碗潔人生」，是一位兼具力量與溫柔的洗碗藝術家。",
+    "seniority": 14,
+    "hourly_rate": 195,
+    "areas": ["中部", "南部"]
+  },
+  {
+    "id": 10,
+    "nickname": "PAS",
+    "title": "見習刷碗師",
+    "intro": "新生代洗碗界的超新星，常以優雅的動作和精湛的效率讓人驚豔。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["北部"]
+  },
+  {
+    "id": 11,
+    "nickname": "DFG",
+    "title": "見習刷碗師",
+    "intro": "在中部地區以充滿活力的洗碗風格嶄露頭角，堅信每一個碗都能反映出生活的光澤。",
+    "seniority": 2,
+    "hourly_rate": 190,
+    "areas": ["中部"]
+  },
+  {
+    "id": 12,
+    "nickname": "HJK",
+    "title": "見習刷碗師",
+    "intro": "南部的餐廳常稱他為「小太陽」，因為他不僅洗碗，還帶來了滿滿的活力。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["南部"]
+  },
+  {
+    "id": 13,
+    "nickname": "LZX",
+    "title": "見習刷碗師",
+    "intro": "東部的碗盤都說 LZX 是個心靈捕手，因為他總能讓它們閃閃發亮，準備迎接下一頓盛宴。",
+    "seniority": 2,
+    "hourly_rate": 190,
+    "areas": ["東部"]
+  },
+  {
+    "id": 14,
+    "nickname": "CVB",
+    "title": "見習刷碗師",
+    "intro": "北部地區的新星，憑著好奇心和學習力，迅速成為大家喜愛的洗碗夥伴。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["北部"]
+  },
+  {
+    "id": 15,
+    "nickname": "NMK",
+    "title": "見習刷碗師",
+    "intro": "NMK 在中部總是受到餐廳老闆的稱讚，因為他的效率讓人覺得像有魔法一樣。",
+    "seniority": 2,
+    "hourly_rate": 190,
+    "areas": ["中部"]
+  },
+  {
+    "id": 16,
+    "nickname": "QAZ",
+    "title": "見習刷碗師",
+    "intro": "南部地區的洗碗精靈，經常用熱情與細心的服務讓碗盤焕然一新。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["南部"]
+  },
+  {
+    "id": 17,
+    "nickname": "WSX",
+    "title": "助理刷碗師",
+    "intro": "大型活動的救星，WSX 能在最混亂的場景中，迅速還原清潔有序的世界。",
+    "seniority": 3,
+    "hourly_rate": 193,
+    "areas": ["中部", "南部"]
+  },
+  {
+    "id": 18,
+    "nickname": "EDC",
+    "title": "助理刷碗師",
+    "intro": "北部與東部的雙料冠軍，EDC 擅長挑戰大型婚宴的碗盤清洗任務。",
+    "seniority": 4,
+    "hourly_rate": 193,
+    "areas": ["北部", "東部"]
+  },
+  {
+    "id": 19,
+    "nickname": "RFV",
+    "title": "助理刷碗師",
+    "intro": "有著洗碗界的魔術手之稱，RFV 在中南部的婚宴與大排檔間奔波如影隨形。",
+    "seniority": 3,
+    "hourly_rate": 193,
+    "areas": ["中部", "南部"]
+  },
+  {
+    "id": 20,
+    "nickname": "TGB",
+    "title": "助理刷碗師",
+    "intro": "不只是洗碗，TGB 還是餐廳氣氛的調劑師，洗碗間的笑聲從未間斷。",
+    "seniority": 4,
+    "hourly_rate": 193,
+    "areas": ["北部", "東部"]
+  }
+]
