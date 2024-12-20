@@ -12,12 +12,12 @@ export class MongoDB {
 
         this.init(url).then(() => {
 
-            logger.info(`suscess: connet to mongoDB @${url}`);
+            logger.info(`suscess: connect to mongoDB @${url}`);
             this.isConneted = true;
 
         }).catch(() => {
 
-            logger.error(`error: cannt connet to mongoDB @${url}`);
+            logger.error(`error: cannot connect to mongoDB @${url}`);
 
         })
 
@@ -25,7 +25,7 @@ export class MongoDB {
 
     async init(url: string) {
         this.DB = await connect(url).catch(err=>{
-            logger.error(`error: cannt connet to mongoDB ${err}`);
+            logger.error(`error: cannot connect to mongoDB ${err}`);
         });
     }
 
