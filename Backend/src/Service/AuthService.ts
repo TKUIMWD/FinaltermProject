@@ -7,6 +7,7 @@ import { DBResp } from "../interfaces/DBResp";
 import { Document } from "mongoose";
 import { generateToken } from "../utils/token";
 import { AuthResponse } from "../interfaces/AuthResponse";
+import { logger } from "../middlewares/log";
 
 export class AuthService extends Service {
 
@@ -35,6 +36,7 @@ export class AuthService extends Service {
             const password_hash = await bcrypt.hash(password, 10);
             const res = new usersModel({ username, password_hash, phone_num , email });
             await res.save();
+            logger.info(`User ${username} registered`);
             resp.message = "Register succeed";
         } catch (error) {
             resp.code = 500;
@@ -73,6 +75,7 @@ export class AuthService extends Service {
                     },
                     token
                 } as AuthResponse;
+                logger.info(`Admin ${username} logged in`);
                 resp.message = "Login succeed";
                 return resp;
             }
@@ -91,6 +94,8 @@ export class AuthService extends Service {
                 },
                 token
             } as AuthResponse;
+            logger.info(`User ${username} logged in`);
+            console.log(resp.body);
             resp.message = "Login succeed";
         } catch (error) {
             resp.code = 500;
