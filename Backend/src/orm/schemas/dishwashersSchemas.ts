@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { DishWasher } from "../../interfaces/DishWasher";
 
 export const dishwashersSchemas = new Schema<DishWasher>({
-    id: { type: Number, required: true },
+    id: { type: String, required: true },
     nickname: { type: String, required: true },
     title: { type: String, required: true },
     intro: { type: String, required: true },

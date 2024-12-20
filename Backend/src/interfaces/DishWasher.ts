@@ -1,6 +1,8 @@
+export type dish_washers_area = "北部" | "中部" | "南部" | "東部";
+
 export interface DishWasher{
     _id? : string,
-    id : number,
+    id : string,
     nickname : string,
     title : string,
     intro : string,

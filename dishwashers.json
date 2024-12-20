@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nickname": "ZZY",
+    "title": "首席刷碗師",
+    "intro": "擁有20年的洗碗經驗，能快速處理各類餐具，且熟悉全台地區的洗碗需求。",
+    "seniority": 20,
+    "hourly_rate": 200,
+    "areas": ["北部", "中部", "南部", "東部"]
+  },
+  {
+    "id": 2,
+    "nickname": "LTA",
+    "title": "資深刷碗師",
+    "intro": "10年專業洗碗經驗，擅長處理高峰時段的碗盤，尤其是在北部和南部地區。",
+    "seniority": 10,
+    "hourly_rate": 195,
+    "areas": ["北部", "南部"]
+  },
+  {
+    "id": 3,
+    "nickname": "HPW",
+    "title": "見習刷碗師",
+    "intro": "雖然只有1年經驗，但充滿學習熱忱，特別擅長北部地區的餐廳洗碗需求。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["北部"]
+  },
+  {
+    "id": 4,
+    "nickname": "LCH",
+    "title": "助理刷碗師",
+    "intro": "3年的洗碗經驗，專注於中部與南部地區，能高效支援大型活動的餐具清理。",
+    "seniority": 3,
+    "hourly_rate": 193,
+    "areas": ["中部", "南部"]
+  }
+]

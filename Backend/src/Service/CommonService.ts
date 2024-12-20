@@ -13,32 +13,66 @@ import { dishwashersModel } from "../orm/schemas/dishwashersSchemas";
 export class CommonService extends Service {
 
 
-    public async getAllDishWashers(): Promise<Array<DBResp<DishWasher>> | undefined> {
-        const res: resp<Array<DBResp<DishWasher>> | undefined> = {
+    public async getAllDishWashers(): Promise<resp<Array<DBResp<DishWasher>> | undefined>> {
+        const resp: resp<Array<DBResp<DishWasher>> | undefined> = {
             code: 200,
             message: "",
             body: undefined
-        }
-
+        };
         try {
-            const dbResp: Array<DBResp<DishWasher>> = await dishwashersModel.find({}).sort({ sid: 1 });
-
-            if (dbResp) {
-                res.body = dbResp;
-                res.message = "find succeed";
+            const dbResp: Array<DBResp<DishWasher>> = await dishwashersModel.find({}).sort({ id: 1 });
+            if (dbResp.length > 0) {
+                resp.body = dbResp;
+                resp.message = "Find succeed";
             } else {
-                res.code = 500;
-                res.message = "server error";
+                resp.code = 404;
+                resp.message = "No records found";
             }
-
         } catch (error) {
-            return undefined
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in getAllDishWashers:", error);
         }
+        return resp;
     }
 
 
-    private async checkIDExists(id: string): Promise<boolean> {
-        const dish_washers = await this.getAllDishWashers();
-        return dish_washers && dish_washers.some(dish_washer => dish_washer.id === id) || false;
+    public async getDishWasherByID(_id: string): Promise<resp<DBResp<DishWasher> | undefined>> {
+        const resp: resp<DBResp<DishWasher> | undefined> = {
+            code: 200,
+            message: "",
+            body: undefined
+        };
+        try {
+            const dbResp: DBResp<DishWasher> | null = await dishwashersModel.findOne({ _id: _id });
+            if (dbResp) {
+                resp.body = dbResp;
+                resp.message = "Dishwasher found successfully";
+            } else {
+                resp.code = 404;
+                resp.message = "Dishwasher not found";
+            }
+        } catch (error) {
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in getDishWasherByID:", error);
+        }
+        return resp;
+    }
+
+
+
+    private async checkIDExists(id: number): Promise<boolean> {
+        try {
+            const dishWashersResp = await this.getAllDishWashers();
+            if (dishWashersResp && dishWashersResp.body) {
+                const dishWashers = dishWashersResp.body;
+                return dishWashers.some(dishWasher => dishWasher.id === id);
+            }
+            return false;
+        } catch (error) {
+            console.error("Error in checkIDExists:", error);
+            return false;
+        }
     }
 }
