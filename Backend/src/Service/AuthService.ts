@@ -1,8 +1,6 @@
 import { Document } from "mongoose";
-import { MongoDB } from "../utils/MongoDB";
 import { DBResp } from "../interfaces/DBResp";
 import { resp } from "../utils/resp";
-import { DeleteResult } from "mongodb";
 import { usersModel } from "../orm/schemas/usersSchemas";
 import bcrypt from "bcrypt";
 import { Service } from "../abstract/Service";
@@ -16,6 +14,12 @@ export class AuthService extends Service {
             body: undefined
         };
         try {
+            if (!phone_num) {
+                resp.code = 400;
+                resp.message = "Phone number is required";
+                return resp;
+            }
+
             const existingUser = await usersModel.findOne({ username });
             if (existingUser) {
                 resp.code = 400;
@@ -24,7 +28,6 @@ export class AuthService extends Service {
             }
 
             const password_hash = await bcrypt.hash(password, 10);
-
             const res = new usersModel({ username, password_hash, phone_num });
             await res.save();
             resp.message = "Register succeed";
