@@ -16,14 +16,14 @@ export class AuthController extends Contorller {
 
     //register with username and password
     public async register(Request: Request, Response: Response) {
-        const resp = await this.service.register(Request.body.username, Request.body.password, Request.body.phone_num)
+        const resp = await this.service.register(Request.body)
         Response.status(resp.code).send(resp)
     }
 
-    // //login with username and password and set jwt token
-    // public async login(Request: Request, Response: Response) {
-    //     const resp = await this.service.login(Request.body)
-    //     Response.status(resp.code).send(resp)
-    // }
+    //login with username and password and set jwt token
+    public async login(Request: Request, Response: Response) {
+        const resp = await this.service.login(Request.body)
+        Response.status(resp.code).send(resp)
+    }
     
 }

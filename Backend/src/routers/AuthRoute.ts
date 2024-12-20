@@ -18,5 +18,9 @@ export class AuthRoute extends Route {
         this.router.post(`${this.url}register`, (req, res) => {
             this.Contorller.register(req, res);
         })
+
+        this.router.post(`${this.url}login`, (req, res) => {
+            this.Contorller.login(req, res);
+        })
     }
 }
