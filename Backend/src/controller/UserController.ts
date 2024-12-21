@@ -28,4 +28,9 @@ export class UserController extends Contorller {
         const resp = await this.service.addReservation(Request)
         Response.status(resp.code).send(resp)
     }
+
+    public async cancelReservationByID(Request: Request, Response: Response) {
+        const resp = await this.service.cancelReservationByID(Request)
+        Response.status(resp.code).send(resp)
+    }
 }

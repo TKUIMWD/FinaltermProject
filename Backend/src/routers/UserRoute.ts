@@ -26,5 +26,9 @@ export class UserRoute extends Route {
         this.router.post(`${this.url}addReservation`, (req, res) => {
             this.Contorller.addReservation(req, res);
         })
+
+        this.router.delete(`${this.url}cancelReservationByID`, (req, res) => {
+            this.Contorller.cancelReservationByID(req, res);
+        })
     }
 }
