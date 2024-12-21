@@ -11,14 +11,14 @@ import { CheckReservation } from "../interfaces/CheckReservation";
 
 export class CommonService extends Service {
 
-    public async getAllDishWashers(): Promise<resp<Array<DBResp<DishWasher>> | undefined>> {
-        const resp: resp<Array<DBResp<DishWasher>> | undefined> = {
+    public async getAllDishWashers(): Promise<resp<Array<DBResp<Document>> | undefined>> {
+        const resp: resp<Array<DBResp<Document>> | undefined> = {
             code: 200,
             message: "",
             body: undefined
         };
         try {
-            const dbResp: Array<DBResp<DishWasher>> = await dishwashersModel.find({}).sort({ id: 1 });
+            const dbResp: Array<DBResp<Document>> = await dishwashersModel.find({}).sort({ id: 1 });
             if (dbResp.length > 0) {
                 resp.body = dbResp;
                 resp.message = "Find succeed";
@@ -35,14 +35,14 @@ export class CommonService extends Service {
     }
 
     // get dishwasher by ID
-    public async getDishWasherByID(_id: string): Promise<resp<DBResp<DishWasher> | undefined>> {
-        const resp: resp<DBResp<DishWasher> | undefined> = {
+    public async getDishWasherByID(_id: string): Promise<resp<DBResp<Document> | undefined>> {
+        const resp: resp<DBResp<Document> | undefined> = {
             code: 200,
             message: "",
             body: undefined
         };
         try {
-            const dbResp: DBResp<DishWasher> | null = await dishwashersModel.findOne({ _id });
+            const dbResp: DBResp<Document> | null = await dishwashersModel.findOne({ _id });
             if (dbResp) {
                 resp.body = dbResp;
                 resp.message = "Dishwasher found successfully";
