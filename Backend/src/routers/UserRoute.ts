@@ -18,5 +18,9 @@ export class UserRoute extends Route {
         this.router.get(`${this.url}getUserData`, (req, res) => {
             this.Contorller.getUserData(req, res);
         })
+
+        this.router.put(`${this.url}updateUserByID`, (req, res) => {
+            this.Contorller.updateUserByID(req, res);
+        })
     }
 }
