@@ -69,10 +69,10 @@ export class AuthService extends Service {
                 }
                 const token = generateToken(admin._id, 'admin');
                 resp.body = {
-                    data: {
-                        id: admin._id,
-                        username: admin.username,
-                    },
+                    // data: {
+                    //     id: admin._id,
+                    //     username: admin.username,
+                    // },
                     token
                 } as AuthResponse;
                 logger.info(`Admin ${username} logged in`);
@@ -86,12 +86,12 @@ export class AuthService extends Service {
             }
             const token = generateToken(user._id, 'user');
             resp.body = {
-                data: {
-                    id: user._id,
-                    username: user.username,
-                    email: user.email,
-                    phone_num: user.phone_num,
-                },
+                // data: {
+                //     id: user._id,
+                //     username: user.username,
+                //     email: user.email,
+                //     phone_num: user.phone_num,
+                // },
                 token
             } as AuthResponse;
             logger.info(`User ${username} logged in`);
