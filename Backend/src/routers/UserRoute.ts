@@ -30,5 +30,9 @@ export class UserRoute extends Route {
         this.router.delete(`${this.url}cancelReservationByID`, (req, res) => {
             this.Contorller.cancelReservationByID(req, res);
         })
+
+        this.router.get(`${this.url}getAllReservations`, (req, res) => {
+            this.Contorller.getAllReservations(req, res);
+        })
     }
 }

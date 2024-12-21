@@ -83,7 +83,7 @@ export class UserService extends Service {
                 return resp;
             }
 
-            const reservations = await reservationsModel.find({ _id: { $in: user.reservations } });
+            const reservations = await reservationsModel.find({ _id: { $in: user.reservations } }).select('-__v');
             resp.body = reservations;
             resp.message = "Reservations found successfully";
         } catch (error) {
@@ -177,15 +177,20 @@ export class UserService extends Service {
             }
 
             const { _id } = decoded as { _id: string };
-            const { dish_washer, start_time, end_time, address } = Request.body;
-
-            const dishWasherUser = await dishwashersModel.findById(dish_washer).select('hourly_rate');
+            const { dish_washer_id, start_time, end_time, address } = Request.body;
+            const dishWasherUser = await dishwashersModel.findById(dish_washer_id).select('hourly_rate nickname title');
             if (!dishWasherUser) {
                 resp.code = 404;
                 resp.message = "Dish washer not found";
                 return resp;
             }
 
+            const user = await usersModel.findById(_id);
+            if (!user) {
+                resp.code = 404;
+                resp.message = "User not found";
+                return resp;
+            }
             const duration = moment.duration(moment(end_time).diff(moment(start_time)));
             const hours = duration.asHours();
             const price = Math.floor(dishWasherUser.hourly_rate * hours);
@@ -196,8 +201,11 @@ export class UserService extends Service {
             const reservation = new reservationsModel({
                 created_at: moment().tz("Asia/Taipei").format("YYYY-MM-DD HH:mm:ss"),
                 status: "未成立",
-                customer: _id,
-                dish_washer: dish_washer,
+                user_id: _id,
+                username:user.username,
+                dish_washer_id: dish_washer_id,
+                dish_washer_nickname: dishWasherUser.nickname,
+                dish_washer_title: dishWasherUser.title,
                 start_time: formattedStartTime,
                 end_time: formattedEndTime,
                 price: price,
@@ -250,7 +258,7 @@ export class UserService extends Service {
                 return resp;
             }
 
-            if (reservation.customer.toString() !== user_id) {
+            if (reservation.user_id.toString() !== user_id) {
                 resp.code = 403;
                 resp.message = "Unauthorized";
                 return resp;
