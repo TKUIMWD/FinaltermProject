@@ -75,7 +75,7 @@ export class CommonService extends Service {
                 end_time: { $gt: startOfDay },
                 status: "已成立"
             });
-            console.log(reservations,_id,startOfDay,endOfDay);
+            // console.log(reservations,_id,startOfDay,endOfDay);
             if (reservations.length > 0) {
                 resp.body = { hasReservation: true };
                 resp.message = "Dishwasher is not available on the selected date";
