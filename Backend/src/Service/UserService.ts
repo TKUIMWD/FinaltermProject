@@ -4,7 +4,7 @@ import { Document } from "mongoose";
 import { DBResp } from "../interfaces/DBResp";
 import { resp } from "../utils/resp";
 import { usersModel } from "../orm/schemas/usersSchemas";
-import { reservationsModel } from "../orm/schemas/reservataionsSchemas";
+import { reservationsModel } from "../orm/schemas/reservationsSchemas";
 import { dishwashersModel } from "../orm/schemas/dishwashersSchemas";
 import { verifyToken } from "../utils/token";
 import { Request, Response } from "express";
@@ -207,7 +207,7 @@ export class UserService extends Service {
             await reservation.save();
 
             await usersModel.findByIdAndUpdate(_id, { $push: { reservations: reservation._id } });
-            resp.body = reservation;
+            resp.body = reservation.toObject({ versionKey: false });
             resp.message = "Reservation added successfully";
         } catch (error) {
             resp.code = 500;
