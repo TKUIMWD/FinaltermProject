@@ -22,4 +22,9 @@ export class CommonController extends Contorller {
         const resp = await this.service.getDishWasherByID(Request.query._id as string)
         Response.status(resp.code).send(resp)
     }
+
+    public async checkReservation(Request:Request,Response:Response){
+        const resp = await this.service.checkReservation(Request.body._id as string, Request.body.date as string)
+        Response.status(resp.code).send(resp)
+    }
 }

@@ -22,5 +22,9 @@ export class UserRoute extends Route {
         this.router.put(`${this.url}updateUserByID`, (req, res) => {
             this.Contorller.updateUserByID(req, res);
         })
+
+        this.router.post(`${this.url}addReservation`, (req, res) => {
+            this.Contorller.addReservation(req, res);
+        })
     }
 }
