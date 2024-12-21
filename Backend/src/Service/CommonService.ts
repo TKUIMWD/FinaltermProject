@@ -59,6 +59,7 @@ export class CommonService extends Service {
     }
 
     // check if a dishwasher is available on a given date
+    // date format: "YYYY-MM-DD"
     public async checkReservation(_id: string, date: string): Promise<resp<CheckReservation | undefined>> {
         const resp: resp<CheckReservation | undefined> = {
             code: 200,
