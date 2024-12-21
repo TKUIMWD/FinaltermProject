@@ -26,4 +26,9 @@ export class AuthController extends Contorller {
         Response.status(resp.code).send(resp)
     }
     
+    //logout with jwt token
+    public async logout(Request: Request, Response: Response) {
+        const resp = await this.service.logout(Request.body)
+        Response.status(resp.code).send(resp)
+    }
 }
