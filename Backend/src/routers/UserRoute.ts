@@ -15,5 +15,8 @@ export class UserRoute extends Route {
 
     protected setRoutes(): void {
 
+        this.router.get(`${this.url}getUserData`, (req, res) => {
+            this.Contorller.getUserData(req, res);
+        })
     }
 }

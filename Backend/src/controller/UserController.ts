@@ -13,4 +13,9 @@ export class UserController extends Contorller {
         this.service = new UserService();
     }
 
+    // get user data by token in header
+    public async getUserData(Request: Request, Response: Response) {
+        const resp = await this.service.getUserData(Request)
+        Response.status(resp.code).send(resp)
+    }
 }
