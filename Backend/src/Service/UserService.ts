@@ -207,7 +207,7 @@ export class UserService extends Service {
             await reservation.save();
 
             await usersModel.findByIdAndUpdate(_id, { $push: { reservations: reservation._id } });
-            resp.body = reservation.toObject({ versionKey: false });
+            // resp.body = reservation.toObject({ versionKey: false });
             resp.message = "Reservation added successfully";
         } catch (error) {
             resp.code = 500;
