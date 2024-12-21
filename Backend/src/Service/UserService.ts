@@ -216,4 +216,65 @@ export class UserService extends Service {
         }
         return resp;
     }
+
+    // cancel ReservationBy ID , only customer can cancel reservation , set status to "取消"
+    public async cancelReservationByID(Request: Request): Promise<resp<DBResp<Document> | undefined>> {
+        const resp: resp<DBResp<Document> | undefined> = {
+            code: 200,
+            message: "",
+            body: undefined
+        };
+        try {
+            const authHeader = Request.headers.authorization;
+            if (!authHeader) {
+                resp.code = 400;
+                resp.message = "Token is required";
+                return resp;
+            }
+
+            const token = authHeader.split(' ')[1];
+            const decoded = verifyToken(token);
+            if (!decoded) {
+                resp.code = 400;
+                resp.message = "Invalid token";
+                return resp;
+            }
+
+            const { _id: user_id } = decoded as { _id: string };
+            const { _id } = Request.query;
+            // console.log(_id,user_id);
+            const reservation = await reservationsModel.findById(_id);
+            if (!reservation) {
+                resp.code = 404;
+                resp.message = "Reservation not found";
+                return resp;
+            }
+
+            if (reservation.customer.toString() !== user_id) {
+                resp.code = 403;
+                resp.message = "Unauthorized";
+                return resp;
+            }
+            if (reservation.status == "未成立") {
+                resp.code = 200;
+                reservation.status = "取消";
+                resp.message = "Reservation canceled successfully";
+                await reservation.save();
+            } else if (reservation.status == "成立") {
+                resp.code = 404;
+                resp.message = "Contact customer service to cancel the reservation";
+            } else {
+                resp.code = 404;
+                resp.message = "Reservation has been canceled";
+            }
+            // resp.body = reservation;
+
+        } catch (error) {
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in cancelReservationByID:", error);
+        }
+        return resp;
+    }
+
 }
