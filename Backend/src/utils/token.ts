@@ -2,7 +2,7 @@ require('dotenv').config();
 import jwt from 'jsonwebtoken';
 
 export const generateToken = (_id: string, role: 'user' | 'admin'): string => {
-    return jwt.sign({ _id, role }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+    return jwt.sign({ _id, role }, process.env.JWT_SECRET!, { expiresIn: '12h' });
 };
 
 export const verifyToken = (token: string) => {

@@ -4,9 +4,12 @@ import { Document } from "mongoose";
 import { DBResp } from "../interfaces/DBResp";
 import { resp } from "../utils/resp";
 import { usersModel } from "../orm/schemas/usersSchemas";
-import { adminsModel } from "../orm/schemas/adminsSchemas";
+import { reservationsModel } from "../orm/schemas/reservataionsSchemas";
+import { dishwashersModel } from "../orm/schemas/dishwashersSchemas";
 import { verifyToken } from "../utils/token";
 import { Request, Response } from "express";
+import moment from "moment-timezone";
+import { adminsModel } from "../orm/schemas/adminsSchemas";
 
 export class UserService extends Service {
 
@@ -45,6 +48,48 @@ export class UserService extends Service {
             resp.code = 500;
             resp.message = "Server error";
             console.error("Error in getUserData:", error);
+        }
+        return resp;
+    }
+
+    // get all reservations for a user
+    public async getAllReservations(Request: Request): Promise<resp<DBResp<Document>[] | undefined>> {
+        const resp: resp<DBResp<Document>[] | undefined> = {
+            code: 200,
+            message: "",
+            body: undefined
+        };
+        try {
+            const authHeader = Request.headers.authorization;
+            if (!authHeader) {
+                resp.code = 400;
+                resp.message = "Token is required";
+                return resp;
+            }
+
+            const token = authHeader.split(' ')[1];
+            const decoded = verifyToken(token);
+            if (!decoded) {
+                resp.code = 400;
+                resp.message = "Invalid token";
+                return resp;
+            }
+
+            const { _id } = decoded as { _id: string };
+            const user = await usersModel.findById(_id).select('reservations');
+            if (!user) {
+                resp.code = 404;
+                resp.message = "User not found";
+                return resp;
+            }
+
+            const reservations = await reservationsModel.find({ _id: { $in: user.reservations } });
+            resp.body = reservations;
+            resp.message = "Reservations found successfully";
+        } catch (error) {
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in getAllReservations:", error);
         }
         return resp;
     }
@@ -104,6 +149,70 @@ export class UserService extends Service {
             resp.code = 500;
             resp.message = "Server error";
             console.error("Error in updateUserByID:", error);
+        }
+        return resp;
+    }
+
+    // addReservation
+    public async addReservation(Request: Request): Promise<resp<DBResp<Document> | undefined>> {
+        const resp: resp<DBResp<Document> | undefined> = {
+            code: 200,
+            message: "",
+            body: undefined
+        };
+        try {
+            const authHeader = Request.headers.authorization;
+            if (!authHeader) {
+                resp.code = 400;
+                resp.message = "Token is required";
+                return resp;
+            }
+
+            const token = authHeader.split(' ')[1];
+            const decoded = verifyToken(token);
+            if (!decoded) {
+                resp.code = 400;
+                resp.message = "Invalid token";
+                return resp;
+            }
+
+            const { _id } = decoded as { _id: string };
+            const { dish_washer, start_time, end_time, address } = Request.body;
+
+            const dishWasherUser = await dishwashersModel.findById(dish_washer).select('hourly_rate');
+            if (!dishWasherUser) {
+                resp.code = 404;
+                resp.message = "Dish washer not found";
+                return resp;
+            }
+
+            const duration = moment.duration(moment(end_time).diff(moment(start_time)));
+            const hours = duration.asHours();
+            const price = Math.floor(dishWasherUser.hourly_rate * hours);
+
+            const formattedStartTime = moment.tz(start_time, "Asia/Taipei").format("YYYY-MM-DD HH:mm");
+            const formattedEndTime = moment.tz(end_time, "Asia/Taipei").format("YYYY-MM-DD HH:mm");
+
+            const reservation = new reservationsModel({
+                created_at: moment().tz("Asia/Taipei").format("YYYY-MM-DD HH:mm:ss"),
+                status: "未成立",
+                customer: _id,
+                dish_washer: dish_washer,
+                start_time: formattedStartTime,
+                end_time: formattedEndTime,
+                price: price,
+                address: address
+            });
+
+            await reservation.save();
+
+            await usersModel.findByIdAndUpdate(_id, { $push: { reservations: reservation._id } });
+            resp.body = reservation;
+            resp.message = "Reservation added successfully";
+        } catch (error) {
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in addReservation:", error);
         }
         return resp;
     }

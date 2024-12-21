@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { Reservation } from "../../interfaces/Reservation";
 
 export const reservationsSchemas = new Schema<Reservation>({
-    timestamp: { type: String, required: true },
+    created_at: { type: String, required: true },
     status: { type: String, required: true },
     customer: { type: String, required: true },
     dish_washer: { type: String, required: true },
