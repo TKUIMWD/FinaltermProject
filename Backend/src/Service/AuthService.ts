@@ -29,7 +29,7 @@ export class AuthService extends Service {
             const existingUser = await usersModel.findOne({ username });
             if (existingUser) {
                 resp.code = 400;
-                resp.message = "Username already exists";
+                resp.message = "Register failed";
                 return resp;
             }
 
@@ -64,7 +64,7 @@ export class AuthService extends Service {
                 const admin = await adminsModel.findOne({ username });
                 if (!admin || !await bcrypt.compare(password, admin.password_hash)) {
                     resp.code = 400;
-                    resp.message = "密碼或帳號錯誤";
+                    resp.message = "username or password error";
                     return resp;
                 }
                 const token = generateToken(admin._id, 'admin');
@@ -81,7 +81,7 @@ export class AuthService extends Service {
             }
             if (!await bcrypt.compare(password, user.password_hash)) {
                 resp.code = 400;
-                resp.message = "密碼或帳號錯誤";
+                resp.message = "username or password error";
                 return resp;
             }
             const token = generateToken(user._id, 'user');
