@@ -94,6 +94,43 @@ export class UserService extends Service {
         return resp;
     }
 
+    public async getReservationByID(Request: Request): Promise<resp<DBResp<Document> | undefined>> {
+        const resp: resp<DBResp<Document> | undefined> = {
+            code: 200,
+            message: "",
+            body: undefined
+        };
+        try {
+            const authHeader = Request.headers.authorization;
+            if (!authHeader) {
+                resp.code = 400;
+                resp.message = "Token is required";
+                return resp;
+            }
+            const token = authHeader.split(' ')[1];
+            const decoded = verifyToken(token);
+            if (!decoded) {
+                resp.code = 400;
+                resp.message = "Invalid token";
+                return resp;
+            }
+            const { _id } = Request.query;
+            const reservation = await reservationsModel.findById(_id);
+            if (!reservation) {
+                resp.code = 404;
+                resp.message = "Reservation not found";
+                return resp;
+            }
+            resp.body = reservation;
+            resp.message = "Reservation found successfully";
+        } catch (error) {
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in getReservationByID:", error);
+        }
+        return resp;
+    }
+
     // update user by ID
     public async updateUserByID(Request: Request): Promise<resp<DBResp<Document> | undefined>> {
         const resp: resp<DBResp<Document> | undefined> = {
@@ -202,7 +239,7 @@ export class UserService extends Service {
                 created_at: moment().tz("Asia/Taipei").format("YYYY-MM-DD HH:mm:ss"),
                 status: "未成立",
                 user_id: _id,
-                username:user.username,
+                username: user.username,
                 dish_washer_id: dish_washer_id,
                 dish_washer_nickname: dishWasherUser.nickname,
                 dish_washer_title: dishWasherUser.title,

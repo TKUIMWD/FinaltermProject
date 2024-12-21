@@ -34,5 +34,9 @@ export class UserRoute extends Route {
         this.router.get(`${this.url}getAllReservations`, (req, res) => {
             this.Contorller.getAllReservations(req, res);
         })
+
+        this.router.get(`${this.url}getReservationByID`, (req, res) => {
+            this.Contorller.getReservationByID(req, res);
+        })
     }
 }

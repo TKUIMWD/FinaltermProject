@@ -38,4 +38,9 @@ export class UserController extends Contorller {
         const resp = await this.service.getAllReservations(Request)
         Response.status(resp.code).send(resp)
     }
+
+    public async getReservationByID(Request: Request, Response: Response) {
+        const resp = await this.service.getReservationByID(Request)
+        Response.status(resp.code).send(resp)
+    }
 }
