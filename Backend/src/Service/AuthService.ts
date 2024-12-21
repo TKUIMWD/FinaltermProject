@@ -8,6 +8,7 @@ import { Document } from "mongoose";
 import { generateToken, verifyToken } from "../utils/token";
 import { AuthResponse } from "../interfaces/AuthResponse";
 import { logger } from "../middlewares/log";
+import { Request, Response } from "express";
 
 export class AuthService extends Service {
 
@@ -106,40 +107,44 @@ export class AuthService extends Service {
 
 
     // logout with jwt token
-    public async logout(data: { token: string }): Promise<resp<undefined>> {
+    public async logout(Request: Request): Promise<resp<undefined>> {
         const resp: resp<undefined> = {
             code: 200,
             message: "",
             body: undefined
         };
         try {
-            const decoded = verifyToken(data.token);
+            const authHeader = Request.headers.authorization;
+            if (!authHeader) {
+                resp.code = 400;
+                resp.message = "Token is required";
+                return resp;
+            }
+
+            const token = authHeader.split(' ')[1];
+            const decoded = verifyToken(token);
             if (!decoded) {
                 resp.code = 400;
                 resp.message = "Invalid token";
                 return resp;
             }
+
             const { _id, role } = decoded as { _id: string, role: string };
             let username = '';
 
             if (role === 'user') {
-                const user = await usersModel.findOne({ _id });
+                const user = await usersModel.findById(_id);
                 if (user) {
                     username = user.username;
                 }
             } else if (role === 'admin') {
-                const admin = await adminsModel.findOne({ _id });
+                const admin = await adminsModel.findById(_id);
                 if (admin) {
                     username = admin.username;
                 }
             }
 
-            if (username) {
-                logger.info(`${role.charAt(0).toUpperCase() + role.slice(1)} ${username} logged out`);
-            } else {
-                logger.info(`User with ID ${_id} and role ${role} logged out`);
-            }
-
+            logger.info(`User ${username} logged out`);
             resp.message = "Logout succeed";
         } catch (error) {
             resp.code = 500;
