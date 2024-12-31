@@ -8,6 +8,7 @@ import InsertOne from './view/InsertOne'
 import UpdateStudent from './view/UpdateStudent'
 import DeleteStudent from './view/DeleteStudent'
 import { StudentsProvider } from './context/StudentsContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {
