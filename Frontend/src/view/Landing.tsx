@@ -4,11 +4,12 @@ import Nav from 'react-bootstrap/Nav';
 import { Container, Modal, Button } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import Footer from '../component/Footer';
+import { useNavigate } from 'react-router-dom';
 import '../style/Landing.css';
 
 function LandingNavBar() {
-    const logo = BaseImgPath + 'icon.png';
-    const iconSize = 80;
+    const DWRP_logo = BaseImgPath + 'DWRP.jpg';
+    const iconSize = 65;
 
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
@@ -24,21 +25,19 @@ function LandingNavBar() {
             <Navbar className="landing-navbar" expand="lg">
                 <Container>
                     <Navbar.Brand>
-                        <span style={{ color: '#4a628a', fontWeight: 'bold', fontSize: '2.5rem' }}>DW</span>
-                        <span style={{ color: '#000000', fontWeight: 'bold', fontSize: '2.5rem' }}>RP</span>
                         <img
                             alt=""
-                            src={logo}
-                            width={iconSize}
+                            src={DWRP_logo}
+                            width={iconSize*3.5}
                             height={iconSize}
                         />{' '}
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link onClick={handleShowLogin}>Login</Nav.Link>
+                            <Nav.Link onClick={handleShowLogin}>登入</Nav.Link>
                             <div className="vr mx-2"></div>
-                            <Nav.Link onClick={handleShowRegister}>Register</Nav.Link>
+                            <Nav.Link onClick={handleShowRegister}>註冊</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -59,6 +58,11 @@ function LandingNavBar() {
 
 export default function Landing() {
     const bgImg = BaseImgPath + 'dish_bg.jpg';
+    const navigate = useNavigate();
+
+    const handleReserveClick = () => {
+        navigate('/DWRP');
+    };
 
     return (
         <div className="landing-page">
@@ -75,7 +79,7 @@ export default function Landing() {
                     <h3>員工罷工沒人幫你刷碗嗎？</h3>
                 </div>
                 <div className="button-container">
-                    <Button className="reserve-button"><strong>開始預約🐮🍺刷碗工</strong></Button>
+                    <Button className="reserve-button" onClick={handleReserveClick}><strong>開始預約🐮🍺刷碗工</strong></Button>
                 </div>
             </div>
             <Footer />
