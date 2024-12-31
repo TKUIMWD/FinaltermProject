@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import { useRef, useEffect, useContext } from 'react';
 import NavBar from '../component/NavBar';
 import '../style/NavBar.css';
 import '../style/DWRP.css';

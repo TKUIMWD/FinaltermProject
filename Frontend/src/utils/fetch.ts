@@ -1,5 +1,3 @@
-import { user_api } from "../enum/api"
-
 const api_base = import.meta.env.Vite_API_BASE
 
 /**
