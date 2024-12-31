@@ -22,5 +22,9 @@ export class CommonRoute extends Route {
         this.router.get(`${this.url}getDishWasherByID`, (req, res) => {
             this.Contorller.getDishWasherByID(req, res);
         })
+
+        this.router.post(`${this.url}checkReservation`, (req, res) => {
+            this.Contorller.checkReservation(req, res);
+        })
     }
 }
