@@ -3,23 +3,26 @@ import { createRoot } from 'react-dom/client'
 import './style/index.css'
 import { RouterProvider, } from 'react-router/dom'
 import { createBrowserRouter } from 'react-router-dom'
-import App from './view/App'
-import InsertOne from './view/InsertOne'
-import { StudentsProvider } from './context/StudentsContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Landing from './view/Landing'
+import DWRP from './view/DWRP'
+import { DishWashersProvider } from './context/DishWashersContext'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Landing />,
+  },
+  {
+    path: '/DWRP',
+    element: <DWRP />,
   }
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <StudentsProvider>
+    <DishWashersProvider>
       <RouterProvider router={router} />
-    </StudentsProvider>
+    </DishWashersProvider>
   </StrictMode>,
 )

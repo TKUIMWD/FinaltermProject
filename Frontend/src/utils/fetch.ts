@@ -1,6 +1,6 @@
-import { api } from "../enum/api"
+import { user_api } from "../enum/api"
 
-const api_base = api.base
+const api_base = import.meta.env.Vite_API_BASE
 
 /**
  * 異步呼叫api, 只可用響應體為 json 的 api
