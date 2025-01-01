@@ -12,7 +12,6 @@ import RegisterModal from './RegisterModal';
 export default function NavBar() {
   const DWRP_logo = BaseImgPath + 'DWRP.jpg';
   const iconSize = 65;
-
   const authStatus = getAuthStatus();
 
   const [showLogin, setShowLogin] = useState(false);
