@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Container, Button, Modal, Fade } from 'react-bootstrap';
+import { Container, Button, Modal, Fade, Toast } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import '../style/NavBar.css';
 import { getAuthStatus } from '../utils/token';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
+import logout from '../utils/logout';
 
 export default function NavBar() {
   const DWRP_logo = BaseImgPath + 'DWRP.jpg';
@@ -16,6 +17,8 @@ export default function NavBar() {
 
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
@@ -31,9 +34,8 @@ export default function NavBar() {
     setShowLogin(true);
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    window.location.reload();
+  const handleLogout = async () => {
+    await logout({ setToastMessage, setShowToast });
   };
 
   return (
@@ -61,7 +63,7 @@ export default function NavBar() {
               {authStatus === 'notLogon' ? (
                 <Nav.Link onClick={handleShowLogin}>登入 / 註冊</Nav.Link>
               ) : (
-                <Button variant="link" onClick={logout} className="nav-link">登出</Button>
+                <Nav.Link onClick={handleLogout}>登出</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
@@ -87,6 +89,16 @@ export default function NavBar() {
           </div>
         </Fade>
       </Modal>
+
+      <Toast
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={3000}
+        autohide
+        className="position-fixed top-0 start-50 translate-middle-x mt-3"
+      >
+        <Toast.Body>{toastMessage}</Toast.Body>
+      </Toast>
     </>
   );
 }

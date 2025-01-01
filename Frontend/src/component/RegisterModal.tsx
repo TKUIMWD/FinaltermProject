@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Toast } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import '../style/RegisterModal.css';
-import { Person, Lock, Envelope, Telephone } from 'react-bootstrap-icons';
+import { Person, Lock, Envelope, Telephone, LockFill } from 'react-bootstrap-icons';
 import { asyncPost } from '../utils/fetch';
 import { auth_api } from '../enum/api';
 
@@ -126,7 +126,7 @@ export default function RegisterModal({ handleShowLogin }: RegisterModalProps) {
                     <Form.Label>確認密碼</Form.Label>
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text"><Lock /></span>
+                            <span className="input-group-text"><LockFill /></span>
                         </div>
                         <Form.Control
                             type="password"
