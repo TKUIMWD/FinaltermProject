@@ -1,42 +1,54 @@
-const api_base = import.meta.env.Vite_API_BASE
+const api_base = import.meta.env.VITE_API_BASE;
+
+interface RequestOptions {
+    headers?: HeadersInit;
+}
 
 /**
  * 異步呼叫api, 只可用響應體為 json 的 api
  * @param api 要呼叫的api
+ * @param options 可選的請求選項
  * @returns json 結果
  */
-export async function asyncGet(api: string):Promise<any>{
+export async function asyncGet(api: string, options: RequestOptions = {}): Promise<any> {
     try {
-        const res: Response = await fetch(api)
+        const res: Response = await fetch(api, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': api_base,
+                'Content-Type': 'application/json',
+                ...options.headers,
+            },
+            mode: 'cors',
+        });
         try {
-            return await res.json()
+            return await res.json();
         } catch (error) {
-            return error
+            return error;
         }
     } catch (error) {
-        return error
+        return error;
     }
 }
 
-export async function asyncPost(api: string, body: {} | FormData) {
+export async function asyncPost(api: string, body: {} | FormData, options: RequestOptions = {}): Promise<any> {
     const res: Response = await fetch(api, {
         method: 'POST',
-        // credentials: 'include',
-        headers:new Headers({
-            'Access-Control-Allow-Origin':api_base,
-            'content-Type':"application/json"
-        }),
-        body: body instanceof FormData?body:JSON.stringify(body),
-        mode:"cors"
-    })
+        headers: {
+            'Access-Control-Allow-Origin': api_base,
+            'Content-Type': body instanceof FormData ? 'multipart/form-data' : 'application/json',
+            ...options.headers,
+        },
+        body: body instanceof FormData ? body : JSON.stringify(body),
+        mode: 'cors',
+    });
     try {
-        let data = res.json()
-        return data
+        let data = await res.json();
+        return data;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
-
 
 export async function asyncPut(api: string, body: {} | FormData) {
     const res: Response = await fetch(api, {
