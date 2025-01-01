@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Container, Button, Modal, Fade, Toast, NavDropdown } from 'react-bootstrap';
+import { Container, Modal, Fade, Toast, NavDropdown } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import '../style/NavBar.css';
 import { getAuthStatus } from '../utils/token';
