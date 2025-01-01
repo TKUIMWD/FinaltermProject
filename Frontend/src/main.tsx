@@ -9,6 +9,7 @@ import CustomerService from './view/CustomerService';
 import { DishWashersProvider } from './context/DishWashersContext';
 import { UserProvider } from './context/UserContext';
 import ProtectedRoute from './component/ProtectedRoute';
+import UpdateUser from './view/UpdateUser';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: '/updateUser',
+    element: (
+      <ProtectedRoute allowedRoles={['user']}>
+        <UpdateUser />
+      </ProtectedRoute>
+    ),
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(

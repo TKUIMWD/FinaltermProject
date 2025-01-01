@@ -50,21 +50,22 @@ export async function asyncPost(api: string, body: {} | FormData, options: Reque
     }
 }
 
-export async function asyncPut(api: string, body: {} | FormData) {
+export async function asyncPut(api: string, body: {} | FormData, options: RequestOptions = {}): Promise<any> {
     const res: Response = await fetch(api, {
         method: 'PUT',
-        headers:new Headers({
-            'Access-Control-Allow-Origin':api_base,
-            'content-Type':"application/json"
-        }),
-        body: body instanceof FormData?body:JSON.stringify(body),
-        mode:"cors"
-    })
+        headers: {
+            'Access-Control-Allow-Origin': api_base,
+            'Content-Type': body instanceof FormData ? 'multipart/form-data' : 'application/json',
+            ...options.headers,
+        },
+        body: body instanceof FormData ? body : JSON.stringify(body),
+        mode: 'cors',
+    });
     try {
-        let data = res.json()
-        return data
+        let data = await res.json();
+        return data;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
