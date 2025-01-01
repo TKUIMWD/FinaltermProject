@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Landing from './view/Landing'
 import DWRP from './view/DWRP'
 import { DishWashersProvider } from './context/DishWashersContext'
+import { UserProvider } from './context/UserContext'
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <DishWashersProvider>
-      <RouterProvider router={router} />
-    </DishWashersProvider>
+    <UserProvider>
+      <DishWashersProvider>
+        <RouterProvider router={router} />
+      </DishWashersProvider>
+    </UserProvider>
   </StrictMode>,
 )

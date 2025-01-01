@@ -3,8 +3,9 @@ import { Form, Button, Container, Row, Col, Toast } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import '../style/LoginModal.css';
 import { Person, Lock } from 'react-bootstrap-icons';
-import { asyncPost } from '../utils/fetch';
-import { auth_api } from '../enum/api';
+import { asyncPost, asyncGet } from '../utils/fetch';
+import { auth_api, user_api } from '../enum/api';
+import { useUser } from '../context/UserContext';
 
 interface LoginModalProps {
     handleShowRegister: () => void;
@@ -19,6 +20,8 @@ export default function LoginModal({ handleShowRegister }: LoginModalProps) {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
 
+    const { setUser } = useUser();
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -31,6 +34,16 @@ export default function LoginModal({ handleShowRegister }: LoginModalProps) {
             localStorage.setItem('token', response.body.token);
             const token = localStorage.getItem('token');
             if (token) {
+                const userResponse = await asyncGet(user_api.getUserData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (userResponse.code === 200) {
+                    setUser(userResponse.body);
+                }
+
                 setToastMessage('Login succeed');
                 setShowToast(true);
                 setTimeout(() => {
@@ -102,7 +115,7 @@ export default function LoginModal({ handleShowRegister }: LoginModalProps) {
             <Toast
                 onClose={() => setShowToast(false)}
                 show={showToast}
-                delay={1000}
+                delay={3000}
                 autohide
                 className="position-fixed top-0 start-50 translate-middle-x mt-3"
             >
