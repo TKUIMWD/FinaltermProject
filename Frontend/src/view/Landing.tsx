@@ -11,6 +11,7 @@ import RegisterModal from '../component/RegisterModal';
 import { getAuthStatus } from '../utils/token';
 import logout from '../utils/logout';
 import { UserContext } from '../context/UserContext';
+import InfoModal from '../component/InfoModal';
 
 function LandingNavBar() {
     const DWRP_logo = BaseImgPath + 'DWRP.jpg';
@@ -20,6 +21,7 @@ function LandingNavBar() {
     const [showRegister, setShowRegister] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    const [showInfoModal, setShowInfoModal] = useState(false);
 
     const userContext = useContext(UserContext);
     if (!userContext) {
@@ -29,6 +31,9 @@ function LandingNavBar() {
 
     const handleCloseLogin = () => setShowLogin(false);
     const handleShowLogin = () => setShowLogin(true);
+
+    const handleShowInfoModal = () => setShowInfoModal(true);
+    const handleCloseInfoModal = () => setShowInfoModal(false);
 
     const handleCloseRegister = () => setShowRegister(false);
     const handleShowRegister = () => {
@@ -52,8 +57,8 @@ function LandingNavBar() {
         <>
             <Navbar className="landing-navbar" expand="lg">
                 <Container>
-                    <Navbar.Brand>
-                        <img
+                <Navbar.Brand onClick={handleShowInfoModal} style={{ cursor: 'pointer' }}>
+                <img
                             alt=""
                             src={DWRP_logo}
                             width={iconSize * 3.5}
@@ -80,6 +85,7 @@ function LandingNavBar() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            <InfoModal show={showInfoModal} handleClose={handleCloseInfoModal} />
 
             <Modal show={showLogin} onHide={handleCloseLogin} centered>
                 <Fade in={showLogin}>
