@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Container, Modal, Button } from 'react-bootstrap';
+import { Container, Modal, Button, Fade } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import Footer from '../component/Footer';
 import { useNavigate } from 'react-router-dom';
 import '../style/Landing.css';
+import LoginModal from '../component/LoginModal';
+import RegisterModal from '../component/RegisterModal';
+import { getAuthStatus } from '../utils/token';
+import logout from '../utils/logout';
 
 function LandingNavBar() {
     const DWRP_logo = BaseImgPath + 'DWRP.jpg';
@@ -18,7 +22,18 @@ function LandingNavBar() {
     const handleShowLogin = () => setShowLogin(true);
 
     const handleCloseRegister = () => setShowRegister(false);
-    const handleShowRegister = () => setShowRegister(true);
+    const handleShowRegister = () => {
+        setShowLogin(false);
+        setShowRegister(true);
+    };
+
+    const handleShowLoginFromRegister = () => {
+        setShowRegister(false);
+        setShowLogin(true);
+    };
+
+    const authStatus = getAuthStatus();
+
 
     return (
         <>
@@ -28,29 +43,45 @@ function LandingNavBar() {
                         <img
                             alt=""
                             src={DWRP_logo}
-                            width={iconSize*3.5}
+                            width={iconSize * 3.5}
                             height={iconSize}
                         />{' '}
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link onClick={handleShowLogin}>登入</Nav.Link>
-                            <div className="vr mx-2"></div>
-                            <Nav.Link onClick={handleShowRegister}>註冊</Nav.Link>
+                            {authStatus === 'notLogon' ? (
+                                <>
+                                    <Nav.Link onClick={handleShowLogin}>登入</Nav.Link>
+                                    <div className="vr mx-2"></div>
+                                    <Nav.Link onClick={handleShowRegister}>註冊</Nav.Link>
+                                </>
+                            ) : (
+                                <Nav.Link onClick={logout}>登出</Nav.Link>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
 
             <Modal show={showLogin} onHide={handleCloseLogin} centered>
-                <Modal.Body>
-                </Modal.Body>
+                <Fade in={showLogin}>
+                    <div>
+                        <Modal.Body>
+                            <LoginModal handleShowRegister={handleShowRegister} />
+                        </Modal.Body>
+                    </div>
+                </Fade>
             </Modal>
 
             <Modal show={showRegister} onHide={handleCloseRegister} centered>
-                <Modal.Body>
-                </Modal.Body>
+                <Fade in={showRegister}>
+                    <div>
+                        <Modal.Body>
+                            <RegisterModal handleShowLogin={handleShowLoginFromRegister} />
+                        </Modal.Body>
+                    </div>
+                </Fade>
             </Modal>
         </>
     );
