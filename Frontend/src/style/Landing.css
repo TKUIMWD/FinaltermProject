@@ -133,3 +133,52 @@
     background-color: #3a4a6a;
     transform: translateY(-2px);
 }
+
+.landing-navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header, .modal-footer {
+    border: none;
+    padding: 1rem 1.5rem;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4A628A;
+}
+
+.modal-body {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333;
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #4A628A;
+    border-color: #4A628A;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #3a4f6d;
+}
