@@ -12,6 +12,7 @@ import { DishWasher } from '../interface/DishWasher';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 
+
 export default function DWRP() {
   const { dishWashers, setDishWashers } = useContext(DishWashersContext);
   const cache = useRef<boolean>(false);
