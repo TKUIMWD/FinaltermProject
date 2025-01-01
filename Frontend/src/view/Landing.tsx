@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Container, Modal, Button, Fade } from 'react-bootstrap';
+import { Container, Modal, Fade, Toast, Button } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import Footer from '../component/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,8 @@ function LandingNavBar() {
 
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
 
     const handleCloseLogin = () => setShowLogin(false);
     const handleShowLogin = () => setShowLogin(true);
@@ -32,8 +34,11 @@ function LandingNavBar() {
         setShowLogin(true);
     };
 
-    const authStatus = getAuthStatus();
+    const handleLogout = async () => {
+        await logout({ setToastMessage, setShowToast });
+    };
 
+    const authStatus = getAuthStatus();
 
     return (
         <>
@@ -57,7 +62,7 @@ function LandingNavBar() {
                                     <Nav.Link onClick={handleShowRegister}>註冊</Nav.Link>
                                 </>
                             ) : (
-                                <Nav.Link onClick={logout}>登出</Nav.Link>
+                                <Nav.Link onClick={handleLogout}>登出</Nav.Link>
                             )}
                         </Nav>
                     </Navbar.Collapse>
@@ -83,6 +88,16 @@ function LandingNavBar() {
                     </div>
                 </Fade>
             </Modal>
+
+            <Toast
+                onClose={() => setShowToast(false)}
+                show={showToast}
+                delay={3000}
+                autohide
+                className="position-fixed top-0 start-50 translate-middle-x mt-3"
+            >
+                <Toast.Body>{toastMessage}</Toast.Body>
+            </Toast>
         </>
     );
 }
