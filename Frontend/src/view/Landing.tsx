@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Container, Modal, Fade, Toast, Button } from 'react-bootstrap';
@@ -10,6 +10,7 @@ import LoginModal from '../component/LoginModal';
 import RegisterModal from '../component/RegisterModal';
 import { getAuthStatus } from '../utils/token';
 import logout from '../utils/logout';
+import { UserContext } from '../context/UserContext';
 
 function LandingNavBar() {
     const DWRP_logo = BaseImgPath + 'DWRP.jpg';
@@ -19,6 +20,12 @@ function LandingNavBar() {
     const [showRegister, setShowRegister] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+
+    const userContext = useContext(UserContext);
+    if (!userContext) {
+        throw new Error("UserContext is undefined");
+    }
+    const { user, setUser } = userContext;
 
     const handleCloseLogin = () => setShowLogin(false);
     const handleShowLogin = () => setShowLogin(true);
@@ -36,9 +43,11 @@ function LandingNavBar() {
 
     const handleLogout = async () => {
         await logout({ setToastMessage, setShowToast });
+        setUser(null);
     };
 
     const authStatus = getAuthStatus();
+    const logoutText = "登出";
 
     return (
         <>
@@ -62,7 +71,11 @@ function LandingNavBar() {
                                     <Nav.Link onClick={handleShowRegister}>註冊</Nav.Link>
                                 </>
                             ) : (
-                                <Nav.Link onClick={handleLogout}>登出</Nav.Link>
+                                <>
+                                    {user && <Nav.Link>Hi, {user.username}</Nav.Link>}
+                                    {user && <div className="vr mx-2"></div>}
+                                    <Nav.Link onClick={handleLogout}>{logoutText}</Nav.Link>
+                                </>
                             )}
                         </Nav>
                     </Navbar.Collapse>
