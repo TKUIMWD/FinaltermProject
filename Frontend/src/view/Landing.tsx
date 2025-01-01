@@ -47,7 +47,6 @@ function LandingNavBar() {
     };
 
     const authStatus = getAuthStatus();
-    const logoutText = "登出";
 
     return (
         <>
@@ -74,7 +73,7 @@ function LandingNavBar() {
                                 <>
                                     {user && <Nav.Link>Hi, {user.username}</Nav.Link>}
                                     {user && <div className="vr mx-2"></div>}
-                                    <Nav.Link onClick={handleLogout}>{logoutText}</Nav.Link>
+                                    <Nav.Link onClick={handleLogout}>登出</Nav.Link>
                                 </>
                             )}
                         </Nav>

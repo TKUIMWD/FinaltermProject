@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Container, Button, Modal, Fade, Toast } from 'react-bootstrap';
+import { Container, Button, Modal, Fade, Toast, NavDropdown } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
 import '../style/NavBar.css';
 import { getAuthStatus } from '../utils/token';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import logout from '../utils/logout';
+import { UserContext } from '../context/UserContext';
 
 export default function NavBar() {
   const DWRP_logo = BaseImgPath + 'DWRP.jpg';
@@ -19,6 +20,11 @@ export default function NavBar() {
   const [showRegister, setShowRegister] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const userContext = useContext(UserContext);
+  if (!userContext) {
+    throw new Error("UserContext is undefined");
+  }
+  const { user, setUser } = userContext;
 
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
@@ -36,6 +42,7 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     await logout({ setToastMessage, setShowToast });
+    setUser(null);
   };
 
   return (
@@ -54,7 +61,7 @@ export default function NavBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link as={Link} to="/DWRP">刷碗工資訊</Nav.Link>
-              {authStatus == 'user' && (
+              {authStatus === 'user' && (
                 <>
                   <Nav.Link as={Link} to="/reserve">預約刷碗工</Nav.Link>
                   <Nav.Link as={Link} to="/customer-service">客戶服務</Nav.Link>
@@ -63,7 +70,13 @@ export default function NavBar() {
               {authStatus === 'notLogon' ? (
                 <Nav.Link onClick={handleShowLogin}>登入 / 註冊</Nav.Link>
               ) : (
-                <Nav.Link onClick={handleLogout}>登出</Nav.Link>
+                authStatus === 'user' ? (
+                  <NavDropdown title={`Hi, ${user?.username || 'User'}`} id="basic-nav-dropdown">
+                    <NavDropdown.Item onClick={handleLogout}>登出</NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <Nav.Link onClick={handleLogout}>登出</Nav.Link>
+                )
               )}
             </Nav>
           </Navbar.Collapse>
