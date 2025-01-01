@@ -8,5 +8,6 @@ export interface DishWasher{
     intro : string,
     seniority : number,
     hourly_rate : number,
-    areas : Array<string> | undefined
+    areas : Array<string> | undefined,
+    img_name?: String | undefined
 }

@@ -9,6 +9,7 @@ export const dishwashersSchemas = new Schema<DishWasher>({
     seniority: { type: Number, required: true },
     hourly_rate: { type: Number, required: true },
     areas: { type: Array, required: true },
+    img_name:{type:String,require:false}
 });
 
 export const dishwashersModel = model<DishWasher>('dish_washers', dishwashersSchemas);
