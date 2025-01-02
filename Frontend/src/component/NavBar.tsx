@@ -72,9 +72,9 @@ export default function NavBar() {
               ) : (
                 authStatus === 'user' ? (
                   <NavDropdown title={`Hi, ${user?.username || 'User'}`} id="basic-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/updateUser">修改資料</NavDropdown.Item>
-                    <NavDropdown.Item onClick={handleLogout}>登出</NavDropdown.Item>
-                  </NavDropdown>
+                    <NavDropdown.Item as={Link} to="/updateUser" className="custom-dropdown-item">修改資料</NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogout} className="custom-dropdown-item">登出</NavDropdown.Item>
+                    </NavDropdown>
                 ) : (
                   <Nav.Link onClick={handleLogout}>登出</Nav.Link>
                 )
