@@ -19,3 +19,25 @@
 .nav-bar .nav-link:hover {
   color: #4a628a;
 }
+
+.nav-bar .nav-dropdown {
+  color: #333;
+}
+
+.nav-bar .nav-dropdown:hover {
+  color: #343A40;
+}
+
+.custom-dropdown-item {
+  color: #333;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #343A40;
+}
+
+.custom-dropdown-item:active {
+  background-color: #4a628a;
+  color: #fff;
+}
