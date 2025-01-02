@@ -108,7 +108,7 @@ export default function AddReservation() {
       <Container className="mt-4 add-reservation-container">
         <h1 className="text-center">預約刷碗工</h1>
         {dishWasherUser && (
-          <p className="text-center">{dishWasherUser.nickname} - {dishWasherUser.title}</p>
+          <p className="text-center">{dishWasherUser.title} - {dishWasherUser.nickname}</p>
         )}
         <Form>
           <Form.Group controlId="reservationDate">
@@ -136,7 +136,7 @@ export default function AddReservation() {
       <Modal show={showModal} onHide={() => setShowModal(false)} className="reservation-modal">
         <Modal.Body>
           {dishWasherUser && (
-            <p>{dishWasherUser.nickname} - {dishWasherUser.title}</p>
+            <p>{dishWasherUser.title} - {dishWasherUser.nickname}</p>
           )}
           <p>預約費用: {price} 元</p>
           <p>是否確認預約？</p>
