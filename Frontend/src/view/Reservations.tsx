@@ -121,7 +121,7 @@ export default function Reservations() {
                                     </Row>
                                     <Row>
                                         <Col md={12}>
-                                            <span className="label">價格 :</span> {reservation.price} 元
+                                            <span className="label">費用 :</span> {reservation.price} 元
                                         </Col>
                                     </Row>
                                     <Row>
