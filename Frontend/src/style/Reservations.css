@@ -1,0 +1,69 @@
+.reservation-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    transition: background-color 0.2s;
+}
+
+.reservation-item:hover {
+    background-color: #e9ecef;
+}
+
+.reservation-item .label {
+    font-weight: bold;
+    color: #4A628A;
+}
+
+.reservation-item .row {
+    margin-bottom: 10px;
+}
+
+.reservation-item .col-md-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.reservation-item .text-right {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.status-established {
+    color: green;
+}
+
+.status-not-established {
+    color: orange;
+}
+
+.status-cancelled {
+    color: red;
+}
+
+.status-revoked {
+    color: gray;
+}
+
+.custom-modal .modal-content {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.custom-modal .modal-header,
+.custom-modal .modal-footer {
+    border: none;
+}
+
+.custom-modal .modal-title {
+    font-weight: bold;
+    color: #343A40;
+}
+
+.custom-modal .modal-body {
+    font-size: 1.1rem;
+    color: #333;
+}
