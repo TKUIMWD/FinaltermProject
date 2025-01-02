@@ -90,7 +90,7 @@ export default function Reservations() {
     return (
         <>
             <NavBar />
-            <Container className="mt-4">
+            <Container className="mt-4 reservations-container">
                 <ReservationFilter selectedStatus={selectedStatus} onStatusChange={setSelectedStatus} />
                 <ListGroup>
                     {sortedReservations.map((reservation) => (

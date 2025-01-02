@@ -1,6 +1,6 @@
 import { ButtonGroup, Button } from 'react-bootstrap';
 import { reservation_status } from '../type/ReservationStatus';
-import '../style/ReservationFilter.css'; // Import the custom CSS
+import '../style/ReservationFilter.css';
 
 interface ReservationFilterProps {
     selectedStatus: reservation_status | '';
