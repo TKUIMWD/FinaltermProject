@@ -5,6 +5,7 @@ import Landing from "../view/Landing";
 import UpdateUser from "../view/UpdateUser";
 import ProtectedRoute from "./ProtectedRoute";
 import Reservations from "../view/Reservations";
+import AddReservation from "../view/AddReservation";
 
 export const router = createBrowserRouter([
     {
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
         element: (
             <ProtectedRoute allowedRoles={['user']}>
                 <Reservations/>
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: '/add-reservation',
+        element: (
+            <ProtectedRoute allowedRoles={['user']}>
+                <AddReservation />
             </ProtectedRoute>
         ),
     }

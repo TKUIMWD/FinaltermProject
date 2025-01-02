@@ -9,14 +9,20 @@ import { asyncGet } from '../utils/fetch';
 import { DishWashersContext } from '../context/DishWashersContext';
 import { common_api } from '../enum/api';
 import { DishWasher } from '../interface/DishWasher';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Card, Container, Row, Col, Toast } from 'react-bootstrap';
 import { BaseImgPath } from '../data/BaseImgPath';
-
+import { useNavigate } from 'react-router-dom';
+import { getAuthStatus } from '../utils/token';
 
 export default function DWRP() {
   const { dishWashers, setDishWashers } = useContext(DishWashersContext);
   const cache = useRef<boolean>(false);
   const dishWasherImgPath = BaseImgPath + 'DWs/';
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const navigate = useNavigate();
+  const authStatus = getAuthStatus();
+
 
   const [filters, setFilters] = useState({
     nickname: '',
@@ -66,16 +72,31 @@ export default function DWRP() {
     );
   });
 
+  const handleCardClick = (dishWasher: DishWasher) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setToastMessage('需登入用戶');
+      setShowToast(true);
+      return;
+    }
+
+    if (authStatus !== 'user') {
+      setToastMessage('需登入用戶');
+      setShowToast(true);
+      return;
+    }
+
+    navigate(`/add-reservation?_id=${dishWasher._id}`);
+  };
+
   const DishWasherCard = ({ dishWasher }: { dishWasher: DishWasher }) => (
     <Col md={3} className="mb-4">
-      <Card className="dishwasher-card">
+      <Card className="dishwasher-card" onClick={() => handleCardClick(dishWasher)}>
         <Card.Img variant="top" src={dishWasher.img_name ? dishWasherImgPath + dishWasher.img_name : dishWasherImgPath + 'dish_washer_default.jpg'} className="dishwasher-img" />
         <Card.Body>
           <Card.Title className="dishwasher-title">{dishWasher.nickname}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted dishwasher-subtitle">{dishWasher.title}</Card.Subtitle>
           <Card.Text className="dishwasher-text">
-            <strong>ID:</strong> {dishWasher.id}
-            <br />
             {dishWasher.intro}
             <br />
             <strong>經驗:</strong> {dishWasher.seniority} 年
@@ -100,6 +121,16 @@ export default function DWRP() {
           ))}
         </Row>
       </Container>
+
+      <Toast
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={3000}
+        autohide
+        className="position-fixed top-0 start-50 translate-middle-x mt-3"
+      >
+        <Toast.Body>{toastMessage}</Toast.Body>
+      </Toast>
     </>
   );
 }

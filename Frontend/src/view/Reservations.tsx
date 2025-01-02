@@ -4,7 +4,7 @@ import NavBar from "../component/NavBar";
 import { user_api } from "../enum/api";
 import { asyncDelete, asyncGet } from "../utils/fetch";
 import { Reservation } from "../interface/Reservation";
-import '../style/Reservations.css'; // Import the custom CSS
+import '../style/Reservations.css';
 import { reservation_status } from "../type/ReservationStatus";
 import ReservationFilter from "../component/ReservationFilter";
 
@@ -74,7 +74,7 @@ export default function Reservations() {
 
     const getStatusClass = (status: reservation_status) => {
         switch (status) {
-            case "成立":
+            case "已成立":
                 return "status-established";
             case "未成立":
                 return "status-not-established";

@@ -60,13 +60,10 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to="/DWRP">刷碗工資訊</Nav.Link>
+              <Nav.Link as={Link} to="/DWRP">預約刷碗工</Nav.Link>
               {authStatus === 'user' && (
                 <>
-                    <NavDropdown title="預約刷碗工" id="reserve-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/reservations">檢視預約</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/add-reservation">新增預約</NavDropdown.Item>
-                    </NavDropdown>
+                  <Nav.Link as={Link} to="/reservations">檢視預約</Nav.Link>
                   <Nav.Link as={Link} to="/customer-service">客戶服務</Nav.Link>
                 </>
               )}
@@ -74,10 +71,10 @@ export default function NavBar() {
                 <Nav.Link onClick={handleShowLogin}>登入 / 註冊</Nav.Link>
               ) : (
                 authStatus === 'user' ? (
-                    <NavDropdown title={`Hi, ${user?.username || 'User'}`} id="basic-nav-dropdown">
-                      <NavDropdown.Item as={Link} to="/updateUser">修改資料</NavDropdown.Item>
-                      <NavDropdown.Item onClick={handleLogout}>登出</NavDropdown.Item>
-                    </NavDropdown>
+                  <NavDropdown title={`Hi, ${user?.username || 'User'}`} id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/updateUser">修改資料</NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogout}>登出</NavDropdown.Item>
+                  </NavDropdown>
                 ) : (
                   <Nav.Link onClick={handleLogout}>登出</Nav.Link>
                 )
