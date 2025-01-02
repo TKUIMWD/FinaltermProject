@@ -20,7 +20,7 @@ export default function ReservationFilter({ selectedStatus, onStatusChange }: Re
                 variant={selectedStatus === '已成立' ? 'primary' : 'outline-primary'}
                 onClick={() => onStatusChange('已成立')}
             >
-                成立
+                已成立
             </Button>
             <Button
                 variant={selectedStatus === '未成立' ? 'primary' : 'outline-primary'}
