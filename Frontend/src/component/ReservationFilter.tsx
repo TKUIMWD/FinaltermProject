@@ -17,10 +17,10 @@ export default function ReservationFilter({ selectedStatus, onStatusChange }: Re
                 所有狀態
             </Button>
             <Button
-                variant={selectedStatus === '成立' ? 'primary' : 'outline-primary'}
-                onClick={() => onStatusChange('成立')}
+                variant={selectedStatus === '已成立' ? 'primary' : 'outline-primary'}
+                onClick={() => onStatusChange('已成立')}
             >
-                成立
+                已成立
             </Button>
             <Button
                 variant={selectedStatus === '未成立' ? 'primary' : 'outline-primary'}
