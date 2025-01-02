@@ -5,7 +5,7 @@ const areas = ["北部", "中部", "南部", "東部"];
 
 function DW_SearchBar({ filters, handleInputChange, handleAreaChange }: DW_SearchBarProps) {
     return (
-        <Form className="mb-4">
+        <Form className="mb-4 dw-searchbar-container">
             <Row>
                 <Col md={6}>
                     <Form.Group controlId="formNickname">

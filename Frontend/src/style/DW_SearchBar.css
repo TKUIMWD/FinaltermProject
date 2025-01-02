@@ -52,6 +52,6 @@
     cursor: pointer;
 }
 
-.row {
+.dw-searchbar-container .row {
     margin-bottom: 1rem;
 }

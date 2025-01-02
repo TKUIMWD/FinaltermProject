@@ -67,3 +67,7 @@
     font-size: 1.1rem;
     color: #333;
 }
+
+.reservations-container .row {
+    margin: 0;
+}
