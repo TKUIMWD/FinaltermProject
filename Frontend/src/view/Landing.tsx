@@ -57,8 +57,8 @@ function LandingNavBar() {
         <>
             <Navbar className="landing-navbar" expand="lg">
                 <Container>
-                <Navbar.Brand onClick={handleShowInfoModal} style={{ cursor: 'pointer' }}>
-                <img
+                    <Navbar.Brand onClick={handleShowInfoModal} style={{ cursor: 'pointer' }}>
+                        <img
                             alt=""
                             src={DWRP_logo}
                             width={iconSize * 3.5}

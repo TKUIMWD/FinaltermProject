@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Button, Container, Row, Col, Toast, InputGroup } from 'react-bootstrap';
 import { useUser } from '../context/UserContext';
 import { asyncPut, asyncGet } from '../utils/fetch';
@@ -14,6 +14,27 @@ export default function UpdateUser() {
     const [email, setEmail] = useState(user?.email || '');
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            return;
+        }
+
+        const fetchData = async () => {
+            const response = await asyncGet(user_api.getUserData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.code === 200) {
+                setUser(response.body);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
