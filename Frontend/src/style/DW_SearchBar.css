@@ -51,3 +51,7 @@
     color: #495057;
     cursor: pointer;
 }
+
+.row {
+    margin-bottom: 1rem;
+}
