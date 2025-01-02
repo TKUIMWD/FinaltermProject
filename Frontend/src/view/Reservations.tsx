@@ -6,6 +6,7 @@ import { asyncDelete, asyncGet } from "../utils/fetch";
 import { Reservation } from "../interface/Reservation";
 import '../style/Reservations.css'; // Import the custom CSS
 import { reservation_status } from "../type/ReservationStatus";
+import ReservationFilter from "../component/ReservationFilter";
 
 export default function Reservations() {
     const [reservations, setReservations] = useState<Reservation[]>([]);
@@ -13,6 +14,16 @@ export default function Reservations() {
     const [selectedReservationId, setSelectedReservationId] = useState<string | null>(null);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState<reservation_status | ''>('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            return;
+        }
+
+        fetchData(token);
+    }, []);
 
     const fetchData = async (token: string) => {
         const response = await asyncGet(user_api.getAllReservations, {
@@ -26,16 +37,9 @@ export default function Reservations() {
         }
     };
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            return;
-        }
-
-        fetchData(token);
-    }, []);
-
-    const sortedReservations = reservations.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    const sortedReservations = reservations
+        .filter(reservation => selectedStatus === '' || reservation.status === selectedStatus)
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
     const handleCancel = (id: string) => {
         setSelectedReservationId(id);
@@ -87,6 +91,7 @@ export default function Reservations() {
         <>
             <NavBar />
             <Container className="mt-4">
+                <ReservationFilter selectedStatus={selectedStatus} onStatusChange={setSelectedStatus} />
                 <ListGroup>
                     {sortedReservations.map((reservation) => (
                         <ListGroup.Item key={reservation._id} className="mb-3 reservation-item">
