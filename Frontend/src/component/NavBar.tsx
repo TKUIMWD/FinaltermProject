@@ -63,7 +63,10 @@ export default function NavBar() {
               <Nav.Link as={Link} to="/DWRP">刷碗工資訊</Nav.Link>
               {authStatus === 'user' && (
                 <>
-                  <Nav.Link as={Link} to="/reserve">預約刷碗工</Nav.Link>
+                    <NavDropdown title="預約刷碗工" id="reserve-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/reservations">檢視預約</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/add-reservation">新增預約</NavDropdown.Item>
+                    </NavDropdown>
                   <Nav.Link as={Link} to="/customer-service">客戶服務</Nav.Link>
                 </>
               )}
