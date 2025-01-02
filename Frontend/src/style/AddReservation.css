@@ -1,0 +1,52 @@
+.add-reservation-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-reservation-container h1 {
+    margin-bottom: 20px;
+  }
+  
+  .add-reservation-container .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .add-reservation-container .form-control {
+    border-radius: 4px;
+  }
+  
+  .add-reservation-container .btn-primary {
+    background-color: #6c757d;
+    border-color: #3a4a6a;
+    border-radius: 4px;
+  }
+  
+  .add-reservation-container .btn-primary:hover {
+    background-color: #4a628a;
+    border-color: #3a4a6a;
+  }
+
+.custom-date-picker,
+.custom-time-picker {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #495057;
+}
+
+.custom-date-picker:focus,
+.custom-time-picker:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
