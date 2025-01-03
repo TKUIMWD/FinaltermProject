@@ -22,4 +22,9 @@ export class AdminController extends Contorller {
         const resp = await this.service.revokeReservationByID(Request)
         Response.status(resp.code).send(resp)
     }
+
+    public async getAllReservations(Request: Request, Response: Response) {
+        const resp = await this.service.getAllReservations(Request)
+        Response.status(resp.code).send(resp)
+    }
 }
