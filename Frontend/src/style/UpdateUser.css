@@ -1,0 +1,59 @@
+.update-user-container {
+    margin-top: 100px;
+}
+
+.update-user-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.update-user-form {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.update-user-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.update-user-form .form-control:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+}
+
+.update-user-form .btn-primary {
+    background-color: #4A628A;
+    border-color: #4A628A;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.update-button {
+    background-color: #4A628A;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #b3b3b3, -4px -4px 8px #ffffff;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-button:hover {
+    background-color: #3a4f6d;
+    box-shadow: 2px 2px 4px #b3b3b3, -2px -2px 4px #ffffff;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+}

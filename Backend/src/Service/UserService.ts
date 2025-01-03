@@ -305,7 +305,7 @@ export class UserService extends Service {
                 reservation.status = "取消";
                 resp.message = "Reservation canceled successfully";
                 await reservation.save();
-            } else if (reservation.status == "成立") {
+            } else if (reservation.status == "已成立") {
                 resp.code = 404;
                 resp.message = "Contact customer service to cancel the reservation";
             } else {

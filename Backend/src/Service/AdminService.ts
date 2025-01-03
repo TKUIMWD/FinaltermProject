@@ -6,6 +6,8 @@ import { reservationsModel } from "../orm/schemas/reservationsSchemas";
 import { Service } from "../abstract/Service";
 import { DBResp } from "../interfaces/DBResp";
 import { resp } from "../utils/resp";
+import { usersModel } from "../orm/schemas/usersSchemas";
+import ReservationWithDetails from "../interfaces/ReservationWithDetails";
 
 export class AdminService extends Service {
 
@@ -34,7 +36,7 @@ export class AdminService extends Service {
             if (decoded && typeof decoded !== 'string') {
                 const admin = await adminsModel.findOne({ _id: decoded._id });
                 if (admin) {
-                    const {_id} = Request.query;
+                    const { _id } = Request.query;
                     if (!_id) {
                         resp.code = 400;
                         resp.message = "Reservation ID is required";
@@ -42,7 +44,7 @@ export class AdminService extends Service {
                     }
                     const reservation = await reservationsModel.findById(_id);
                     if (reservation) {
-                        if (reservation.status === "成立") {
+                        if (reservation.status === "已成立") {
                             resp.code = 400;
                             resp.message = "Reservation is already established";
                         } else if (reservation.status === "取消") {
@@ -52,7 +54,7 @@ export class AdminService extends Service {
                             resp.code = 400;
                             resp.message = "Reservation has already been revoked";
                         } else {
-                            reservation.status = "成立";
+                            reservation.status = "已成立";
                             await reservation.save();
                             // resp.body = reservation;
                             resp.message = "Reservation established successfully";
@@ -77,7 +79,7 @@ export class AdminService extends Service {
         return resp;
     }
 
-    public async revokeReservationByID(Request: Request): Promise<resp<DBResp<Document> | undefined>> { 
+    public async revokeReservationByID(Request: Request): Promise<resp<DBResp<Document> | undefined>> {
         const resp: resp<DBResp<Document> | undefined> = {
             code: 200,
             message: "",
@@ -101,7 +103,7 @@ export class AdminService extends Service {
             if (decoded && typeof decoded !== 'string') {
                 const admin = await adminsModel.findOne({ _id: decoded._id });
                 if (admin) {
-                    const {_id} = Request.query;
+                    const { _id } = Request.query;
                     if (!_id) {
                         resp.code = 400;
                         resp.message = "Reservation ID is required";
@@ -137,6 +139,56 @@ export class AdminService extends Service {
             resp.code = 500;
             resp.message = "Server error";
             console.error("Error in revokeReservationByID:", error);
+        }
+        return resp;
+    }
+
+    public async getAllReservations(Request: Request): Promise<resp<ReservationWithDetails[] | undefined>> {
+        const resp: resp<ReservationWithDetails[] | undefined> = {
+            code: 200,
+            message: "",
+            body: undefined
+        };
+        try {
+            const authHeader = Request.headers.authorization;
+            if (!authHeader) {
+                resp.code = 400;
+                resp.message = "Token is required";
+                return resp;
+            }
+            const token = authHeader.split(" ")[1];
+            const decoded = verifyToken(token);
+            if (!decoded) {
+                resp.code = 400;
+                resp.message = "Invalid token";
+                return resp;
+            }
+            if (decoded && typeof decoded !== "string") {
+                const admin = await adminsModel.findOne({ _id: decoded._id });
+                if (admin) {
+                    const reservations = await reservationsModel.find().select("-__v");
+                    const reservationsWithDetails = await Promise.all(reservations.map(async (reservation) => {
+                        const user = await usersModel.findById(reservation.user_id).select("email phone_num");
+                        return {
+                            ...reservation.toObject(),
+                            user_email: user?.email,
+                            user_phone_num: user?.phone_num
+                        } as ReservationWithDetails;
+                    }));
+                    resp.body = reservationsWithDetails;
+                    resp.message = "Reservations retrieved successfully";
+                } else {
+                    resp.code = 403;
+                    resp.message = "Permission denied";
+                }
+            } else {
+                resp.code = 401;
+                resp.message = "Invalid token or insufficient permissions";
+            }
+        } catch (error) {
+            resp.code = 500;
+            resp.message = "Server error";
+            console.error("Error in getAllReservations:", error);
         }
         return resp;
     }    

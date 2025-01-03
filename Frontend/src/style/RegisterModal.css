@@ -1,0 +1,45 @@
+.register-modal-container {
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register-modal-container .form-group {
+    position: relative;
+}
+
+.register-modal-container .input-group-text {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-right: 0;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.5rem;
+    color: #495057;
+}
+
+.register-modal-container .form-control {
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.register-button {
+    background-color: #4A628A;
+    border: none;
+}
+
+.register-button:hover {
+    background-color: #3a4f6d;
+}
+
+.register-modal-container .btn-link {
+    color: #4A628A;
+    text-decoration: none;
+}
+
+.register-modal-container .btn-link:hover {
+    color: #3a4f6d;
+    text-decoration: underline;
+}

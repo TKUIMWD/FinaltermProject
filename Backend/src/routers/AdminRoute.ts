@@ -21,5 +21,9 @@ export class AdminRoute extends Route {
         this.router.delete(`${this.url}revokeReservationByID`, (req, res) => {
             this.Contorller.revokeReservationByID(req, res);
         })
+
+        this.router.get(`${this.url}getAllReservations`, (req, res) => {
+            this.Contorller.getAllReservations(req, res);
+        })
     }
 }

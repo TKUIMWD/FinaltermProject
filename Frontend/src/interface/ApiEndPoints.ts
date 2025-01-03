@@ -1,7 +1,30 @@
-export default interface ApiEndpoints {
+export interface CommonApiEndpoints {
     base: string;
-    findAll: string;
-    insertOne: string;
-    deleteByID: string;
-    updateNameByID: string;
+    getAllDishWashers: string;
+    getDishWasherByID: string;
+    checkReservation: string;
+}
+
+export interface AuthApiEndpoints {
+    base: string;
+    login: string;
+    register: string;
+    logout: string;
+}
+
+export interface UserApiEndpoints {
+    base: string;
+    getUserData: string;
+    updateUserByID: string;
+    getAllReservations: string;
+    getReservationByID: string;
+    addReservation: string;
+    cancelReservationByID: string;
+}
+
+export interface AdminApiEndpoints {
+    base: string;
+    getAllReservations: string;
+    establishReservationByID: string;
+    revokeReservationByID: string;
 }
