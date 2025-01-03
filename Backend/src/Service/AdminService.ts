@@ -44,7 +44,7 @@ export class AdminService extends Service {
                     }
                     const reservation = await reservationsModel.findById(_id);
                     if (reservation) {
-                        if (reservation.status === "成立") {
+                        if (reservation.status === "已成立") {
                             resp.code = 400;
                             resp.message = "Reservation is already established";
                         } else if (reservation.status === "取消") {
@@ -54,7 +54,7 @@ export class AdminService extends Service {
                             resp.code = 400;
                             resp.message = "Reservation has already been revoked";
                         } else {
-                            reservation.status = "成立";
+                            reservation.status = "已成立";
                             await reservation.save();
                             // resp.body = reservation;
                             resp.message = "Reservation established successfully";
