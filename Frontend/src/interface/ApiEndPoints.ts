@@ -24,6 +24,7 @@ export interface UserApiEndpoints {
 
 export interface AdminApiEndpoints {
     base: string;
+    getAllReservations: string;
     establishReservationByID: string;
     revokeReservationByID: string;
 }

@@ -26,6 +26,7 @@ export const user_api: UserApiEndpoints = {
 
 export const admin_api : AdminApiEndpoints = {
     base: import.meta.env.VITE_ADMIN_API_BASE_URL,
+    getAllReservations: `${import.meta.env.VITE_ADMIN_API_BASE_URL}/getAllReservations`,
     establishReservationByID: `${import.meta.env.VITE_ADMIN_API_BASE_URL}/establishReservationByID`,
     revokeReservationByID: `${import.meta.env.VITE_ADMIN_API_BASE_URL}/revokeReservationByID`
 }
