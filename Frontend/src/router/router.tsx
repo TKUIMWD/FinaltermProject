@@ -6,6 +6,7 @@ import UpdateUser from "../view/UpdateUser";
 import ProtectedRoute from "./ProtectedRoute";
 import Reservations from "../view/Reservations";
 import AddReservation from "../view/AddReservation";
+import ReservationsManagement from "../view/ReservationsManagement";
 
 export const router = createBrowserRouter([
     {
@@ -47,5 +48,13 @@ export const router = createBrowserRouter([
                 <AddReservation />
             </ProtectedRoute>
         ),
-    }
+    },
+    {
+        path: '/reservations-management',
+        element: (
+            <ProtectedRoute allowedRoles={['admin']}>
+                <ReservationsManagement />
+            </ProtectedRoute>
+        ),
+    },
 ]);

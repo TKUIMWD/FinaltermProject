@@ -67,6 +67,11 @@ export default function NavBar() {
                   <Nav.Link as={Link} to="/customer-service">客戶服務</Nav.Link>
                 </>
               )}
+              {authStatus === 'admin' && (
+                <>
+                  <Nav.Link as={Link} to="/reservations-management">管理預約</Nav.Link>
+                </>
+              )}
               {authStatus === 'notLogon' ? (
                 <Nav.Link onClick={handleShowLogin}>登入 / 註冊</Nav.Link>
               ) : (
