@@ -9,6 +9,7 @@
     border: none;
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .dishwasher-card .card-body {
