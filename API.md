@@ -98,7 +98,7 @@ Query Parameter
 }
 ```
 
-**Token權限不足或錯誤**
+**Token權限不足**
 
 ```
 {
@@ -107,13 +107,18 @@ Query Parameter
 }
 ```
 
-### 2. 撤銷訂單
+### 2. 撤銷預約
 
 ```
-DELETE /api/v1/admin/revokeReservationByID?_id=#id
-
-Authorization Bearer Token
-?_id=6766a6753b44a30c5cae8206
+DELETE /api/v1/admin/revokeReservationByID?_id={_id}
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
+```
+Query Parameter
+```
+?_id={_id} // reservation _id
 ```
 
 **撤銷成功**
@@ -145,7 +150,7 @@ Authorization Bearer Token
 
 ```
 
-**預約ID缺失**
+**預約ID不存在**
 
 ```
 {
@@ -192,7 +197,7 @@ Authorization Bearer Token
 }
 ```
 
-**Token無權限或格式錯誤**
+**Token無權限**
 
 ```
 {
@@ -204,11 +209,13 @@ Authorization Bearer Token
 ### 3. 獲取所有預約記錄
 ```
 GET /api/v1/admin/getAllReservations
-
-Authorization Bearer Token
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
 ```
 
-**請求成功**
+**獲取成功**
 
 
 ```
@@ -276,7 +283,7 @@ Authorization Bearer Token
 
 ```
 
-**Token 無權限或格式錯誤**
+**Token權限不足**
 
 ```
 {
@@ -288,8 +295,15 @@ Authorization Bearer Token
 ## Auth
 
 ### 1. 登入
-
-`POST /api/v1/auth/login`
+```
+POST /api/v1/auth/login
+```
+```
+{
+    "username": "test"
+    "password": "password"
+}
+```
 
 **登入成功**
 
@@ -313,9 +327,9 @@ Authorization Bearer Token
 ```
 
 ### 2. 註冊
-
-`POST /api/v1/auth/register`
-
+```
+POST /api/v1/auth/register
+```
 ```
 {
     "username":"testuser",
@@ -357,8 +371,10 @@ Authorization Bearer Token
 
 ```
 POST /api/v1/auth/logout
-
-Authorization Bearer Token
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
 ```
 
 **登出成功**
@@ -390,11 +406,11 @@ Authorization Bearer Token
 
 ## Common
 
-### 1. 取得所以洗碗工
-
-`GET /api/v1/common/getAllDishWashers`
-
-**請求成功**
+### 1. 取得所有洗碗工
+```
+GET /api/v1/common/getAllDishWashers
+```
+**取得成功**
 
 ```
 {
@@ -431,7 +447,7 @@ Authorization Bearer Token
         }...
 ```
 
-**請求失敗資料庫中沒有紀錄**
+**取得失敗 資料庫中沒有紀錄**
 
 ```
 {
@@ -444,12 +460,14 @@ Authorization Bearer Token
 ### 2. 使用洗碗工_ID取得詳細資料
 
 ```
-GET /api/v1/common/getDishWasherByID?_id=#id`
-
-?_id=67655263dba3b7401e18ecde
+GET /api/v1/common/getDishWasherByID?_id={_id}`
+```
+Query Parameter
+```
+?_id={_id}
 ```
 
-**請求成功**
+**取得成功**
 
 
 ```
@@ -472,7 +490,7 @@ GET /api/v1/common/getDishWasherByID?_id=#id`
 }
 ```
 
-**請求失敗洗碗工ID不存在資料庫中**
+**取得失敗洗碗工ID不存在資料庫中**
 
 ```
 {
@@ -493,7 +511,7 @@ POST /api/v1/common/checkReservation
 }
 ```
 
-**請求成功**
+**取得成功**
 
 ```
 (沒有預約)
@@ -522,8 +540,10 @@ POST /api/v1/common/checkReservation
 
 ```
 GET /api/v1/user/getUserData
-
-Authorization Bearer Token
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
 ```
 
 **取得成功**
@@ -574,13 +594,19 @@ Authorization Bearer Token
 ```
 PUT /api/v1/user/updateUserByID?_id=#id
 
-Authorization Bearer Token
 {
     "username":"testtt",
     "phone_num":"0000000000",
     "email":"testtt@gail.com"
 }
-?_id=6766de1b7eacb03912274cfd
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
+```
+Query Parameter
+```
+?_id={_id}
 ```
 
 **更新成功**
@@ -634,9 +660,10 @@ Authorization Bearer Token
 
 ```
 GET /api/v1/user/getAllReservations
-
-
-Authorization Bearer Token
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
 ```
 
 **取得成功**
@@ -675,12 +702,16 @@ Authorization Bearer Token
 ```
 
 ### 4. 根據傳入的 預約_id 查詢指定的預約
-
-GET /api/v1/user/getReservationByID?_id=#id
-
 ```
-Authorization Bearer Token
-?_id=6766e3157eacb03912274d08 //預約ID
+GET /api/v1/user/getReservationByID?_id=#id
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
+```
+Query Parameter
+```
+?_id={_id}
 ```
 
 **取得成功**
@@ -750,14 +781,16 @@ Authorization Bearer Token
 ```
 POST /api/v1/user/addReservation
 
-Authorization Bearer Token
 {
     "dish_washer_id": "67655263dba3b7401e18eccc",
     "start_time": "2024-12-31 11:20",
     "end_time": "2024-12-31 15:32",
     "address": "哈哈刷碗"
 }
-
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
 ```
 
 **新增成功**
@@ -820,9 +853,14 @@ Authorization Bearer Token
 
 ```
 DELETE /api/v1/user/cancelReservationByID?_id=#id
-
-Authorization Bearer Token
-?_id=6766de1b7eacb03912274cfd
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
+```
+Query Parameter
+```
+?_id={_id}
 ```
 
 **刪除成功**
