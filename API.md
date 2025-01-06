@@ -25,7 +25,7 @@ Query Parameter
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
@@ -43,7 +43,7 @@ Query Parameter
 }
 ```
 
-**預約ID缺失**
+**缺少預約ID**
 
 ```
 {
@@ -84,8 +84,8 @@ Query Parameter
 
 ```
 {
-    "code": 400,
-    "message": "Reservation has already been canceled"
+  "code": 400,
+  "message": "Reservation has already been canceled"
 }
 ```
 
@@ -93,12 +93,12 @@ Query Parameter
 
 ```
 {
-    "code": 400,
-    "message": "Reservation has already been revoked"
+  "code": 400,
+  "message": "Reservation has already been revoked"
 }
 ```
 
-**Token權限不足**
+**Token無效或權限不足**
 
 ```
 {
@@ -130,12 +130,12 @@ Query Parameter
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
-    "code": 400,
-    "message": "Token is required"
+  "code": 400,
+  "message": "Token is required"
 }
 ```
 
@@ -143,19 +143,17 @@ Query Parameter
 
 ```
 {
-    "code": 400,
-    "message": "Invalid token"
-
+  "code": 400,
+  "message": "Invalid token"
 }
-
 ```
 
-**預約ID不存在**
+**缺少預約ID**
 
 ```
 {
-    "code": 400,
-    "message": "Reservation ID is required"
+  "code": 400,
+  "message": "Reservation ID is required"
 }
 ```
 
@@ -188,7 +186,7 @@ Query Parameter
 }
 ```
 
-**Token權限不足**
+**Token無權限**
 
 ```
 {
@@ -197,7 +195,7 @@ Query Parameter
 }
 ```
 
-**Token無權限**
+**Token無效或權限不足**
 
 ```
 {
@@ -253,14 +251,13 @@ Authorization: Bearer {JWT_TOKEN}
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
   "code": 400,
   "message": "Token is required"
 }
-
 ```
 
 **Token無效**
@@ -273,7 +270,7 @@ Authorization: Bearer {JWT_TOKEN}
 
 ```
 
-**Token權限不足**
+**Token沒有權限**
 
 ```
 {
@@ -283,7 +280,7 @@ Authorization: Bearer {JWT_TOKEN}
 
 ```
 
-**Token權限不足**
+**Token無效或權限不足**
 
 ```
 {
@@ -300,8 +297,8 @@ POST /api/v1/auth/login
 ```
 ```
 {
-    "username": "test"
-    "password": "password"
+  "username": "test"
+  "password": "password"
 }
 ```
 
@@ -312,7 +309,7 @@ POST /api/v1/auth/login
   "code": 200,
   "message": "Login succeed",
   "body": {
-    "token": "<TOKEN>"
+    "token": {JWT_TOKEN}
   }
 }
 ```
@@ -348,8 +345,7 @@ POST /api/v1/auth/register
 }
 ```
 
-**未輸入電話號碼**
-
+**缺少電話號碼**
 
 ```
 {
@@ -358,7 +354,7 @@ POST /api/v1/auth/register
 }
 ```
 
-**用戶名已存在**
+**註冊失敗 用戶名已存在**
 
 ```
 {
@@ -395,7 +391,7 @@ Authorization: Bearer {JWT_TOKEN}
 }
 ```
 
-**無效的Token**
+**Token無效**
 
 ```
 {
@@ -445,6 +441,8 @@ GET /api/v1/common/getAllDishWashers
                 "南部"
             ]
         }...
+    ]
+}
 ```
 
 **取得失敗 資料庫中沒有紀錄**
@@ -464,7 +462,7 @@ GET /api/v1/common/getDishWasherByID?_id={_id}`
 ```
 Query Parameter
 ```
-?_id={_id}
+?_id={_id} // dish_washer _id
 ```
 
 **取得成功**
@@ -490,7 +488,7 @@ Query Parameter
 }
 ```
 
-**取得失敗洗碗工ID不存在資料庫中**
+**取得失敗 洗碗工ID不存在資料庫中**
 
 ```
 {
@@ -506,8 +504,8 @@ Query Parameter
 POST /api/v1/common/checkReservation
 
 {
-    "_id":"67655263dba3b7401e18eccc",
-    "date":"2025-12-20"
+  "_id":"67655263dba3b7401e18eccc",
+  "date":"2025-12-20"
 }
 ```
 
@@ -562,7 +560,7 @@ Authorization: Bearer {JWT_TOKEN}
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
@@ -592,7 +590,7 @@ Authorization: Bearer {JWT_TOKEN}
 ### 2. 更新用戶訊息
 
 ```
-PUT /api/v1/user/updateUserByID?_id=#id
+PUT /api/v1/user/updateUserByID?_id={_id}
 
 {
     "username":"testtt",
@@ -606,11 +604,10 @@ Authorization: Bearer {JWT_TOKEN}
 ```
 Query Parameter
 ```
-?_id={_id}
+?_id={_id} // user _id
 ```
 
 **更新成功**
-
 
 ```
 {
@@ -619,7 +616,7 @@ Query Parameter
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
@@ -647,7 +644,7 @@ Query Parameter
 }
 ```
 
-**用戶名已被使用**
+**更新失敗 用戶名已被使用**
 
 ```
 {
@@ -691,7 +688,7 @@ Authorization: Bearer {JWT_TOKEN}
 }
 ```
 
-**取得成功但沒有預約資料**
+**取得成功**
 
 ```
 {
@@ -703,7 +700,7 @@ Authorization: Bearer {JWT_TOKEN}
 
 ### 4. 根據傳入的 預約_id 查詢指定的預約
 ```
-GET /api/v1/user/getReservationByID?_id=#id
+GET /api/v1/user/getReservationByID?_id={_id}
 ```
 Header
 ```
@@ -711,7 +708,7 @@ Authorization: Bearer {JWT_TOKEN}
 ```
 Query Parameter
 ```
-?_id={_id}
+?_id={_id} // reservation _id
 ```
 
 **取得成功**
@@ -739,7 +736,7 @@ Query Parameter
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
@@ -758,7 +755,7 @@ Query Parameter
 }
 ```
 
-**預約ID缺失**
+**缺少預約ID查詢參數**
 
 ```
 {
@@ -776,7 +773,7 @@ Query Parameter
 }
 ```
 
-### 5. 新增預約紀錄
+### 5. 新增預約
 
 ```
 POST /api/v1/user/addReservation
@@ -803,7 +800,7 @@ Authorization: Bearer {JWT_TOKEN}
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
@@ -849,10 +846,10 @@ Authorization: Bearer {JWT_TOKEN}
 }
 ```
 
-### 6. 使用預約ID刪除
+### 6. 使用預約ID取消預約
 
 ```
-DELETE /api/v1/user/cancelReservationByID?_id=#id
+DELETE /api/v1/user/cancelReservationByID?_id={_id}
 ```
 Header
 ```
@@ -860,10 +857,10 @@ Authorization: Bearer {JWT_TOKEN}
 ```
 Query Parameter
 ```
-?_id={_id}
+?_id={_id} // reservation _id
 ```
 
-**刪除成功**
+**取消成功**
 
 ```
 {
@@ -872,7 +869,7 @@ Query Parameter
 }
 ```
 
-**Token缺失**
+**缺少Token**
 
 ```
 {
