@@ -2,15 +2,20 @@
 
 ## Admin
 
-### 1. 建立預約
+### 1. 成立預約
 ```
-POST /api/v1/admin/establishReservationByID?_id=#id
-
-Authorization Bearer Token
-?_id=6766a6753b44a30c5cae8206 // 預約_id
+POST /api/v1/admin/establishReservationByID?_id={_id}
+```
+Header
+```
+Authorization: Bearer {JWT_TOKEN}
+```
+Query Parameter
+```
+?_id={_id} // reservation _id
 ```
 
-**建立成功**
+**成立成功**
 
 
 ```
@@ -18,15 +23,14 @@ Authorization Bearer Token
   "code": 200,
   "message": "Reservation established successfully"
 }
-
 ```
 
 **Token缺失**
 
 ```
 {
-    "code": 400,
-    "message": "Token is required"
+  "code": 400,
+  "message": "Token is required"
 }
 ```
 
@@ -34,19 +38,17 @@ Authorization Bearer Token
 
 ```
 {
-    "code": 400,
-    "message": "Invalid token"
-
+  "code": 400,
+  "message": "Invalid token"
 }
-
 ```
 
 **預約ID缺失**
 
 ```
 {
-    "code": 400,
-    "message": "Reservation ID is required"
+  "code": 400,
+  "message": "Reservation ID is required"
 }
 ```
 
@@ -54,8 +56,8 @@ Authorization Bearer Token
 
 ```
 {
-    "code": 404,
-    "message": "Reservation not found"
+  "code": 404,
+  "message": "Reservation not found"
 }
 ```
 
@@ -64,21 +66,21 @@ Authorization Bearer Token
 
 ```
 {
-    "code": 403,
-    "message": "Permission denied"
+  "code": 403,
+  "message": "Permission denied"
 }
 ```
 
-**訂單編號已存在但狀態為已成立**
+**預約狀態為已成立**
 
 ```
 {
-    "code": 400,
-    "message": "Reservation is already established"
+  "code": 400,
+  "message": "Reservation is already established"
 }
 ```
 
-**訂單編號已存在但狀態為已取消**
+**預約狀態為已取消**
 
 ```
 {
@@ -87,7 +89,7 @@ Authorization Bearer Token
 }
 ```
 
-**訂單編號已存在但狀態為已撤銷**
+**預約狀態為已撤銷**
 
 ```
 {
@@ -96,7 +98,7 @@ Authorization Bearer Token
 }
 ```
 
-**Token無權限或格式錯誤**
+**Token權限不足或錯誤**
 
 ```
 {
