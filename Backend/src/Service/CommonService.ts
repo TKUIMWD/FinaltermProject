@@ -71,7 +71,7 @@ export class CommonService extends Service {
             const endOfDay = moment.tz(date, "Asia/Taipei").endOf('day').format("YYYY-MM-DD HH:mm");
 
             const reservations = await reservationsModel.find({
-                dish_washer: _id,
+                dish_washer_id: _id,
                 start_time: { $lt: endOfDay },
                 end_time: { $gt: startOfDay },
                 status: "已成立"
