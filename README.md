@@ -34,6 +34,8 @@ npm run dev
 修改變數配置 
 運行 
 ```
+cd Backend
+npm install
 npm run dev
 ```
 ## 主題
