@@ -106,6 +106,7 @@ https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%
 
 ## 架構圖與流程圖
 
+![](./Images/arch-flow-chart.png)
 
 ## 分工表
 
@@ -117,3 +118,6 @@ https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%
     - Figma製作，錄製操作影片
 - ### LTA
     - 測試網站功能、API文檔製作
+
+## Demo
+
