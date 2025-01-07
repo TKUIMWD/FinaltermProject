@@ -1,48 +1,55 @@
 [
   {
     "id": 1,
-    "nickname": "ZZY",
-    "title": "首席刷碗師",
-    "intro": "用雙手征服每個碗盤的傳奇人物，據說曾在 20 分鐘內清理過上千個盤子，是洗碗界的活字典。",
-    "seniority": 20,
-    "hourly_rate": 200,
-    "areas": ["北部", "中部", "南部", "東部"]
-  },
-  {
-    "id": 2,
-    "nickname": "LTA",
-    "title": "資深刷碗師",
-    "intro": "高峰時段的救世主，碗盤如流水般來去，LTA 擁有的速度讓洗碗機都甘拜下風。",
-    "seniority": 10,
-    "hourly_rate": 195,
-    "areas": ["北部", "南部"]
-  },
-  {
-    "id": 3,
-    "nickname": "HPW",
-    "title": "見習刷碗師",
-    "intro": "雖然只有一年的經驗，但已經磨練出如侍劍般的洗碗技藝，立志成為碗盤世界的劍豪。",
-    "seniority": 1,
-    "hourly_rate": 190,
-    "areas": ["北部"]
-  },
-  {
-    "id": 4,
     "nickname": "LCH",
     "title": "助理刷碗師",
     "intro": "活動現場的隱形英雄，LCH 總能在碗盤堆成山之前，神不知鬼不覺地讓它們消失。",
     "seniority": 3,
     "hourly_rate": 193,
-    "areas": ["中部", "南部"]
+    "areas": ["中部","南部"],
+    "img_name": "LCH.jpg"
+  },
+  {
+    "id": 2,
+    "nickname": "ZZY",
+    "title": "首席刷碗師",
+    "intro": "用雙手征服每個碗盤的傳奇人物，據說曾在 20 分鐘內清理過上千個盤子，是洗碗界的活字典。",
+    "seniority": 20,
+    "hourly_rate": 200,
+    "areas": ["北部", "中部", "南部", "東部"],
+    "img_name": "ZZY.jpg"
+  },
+  {
+    "id": 3,
+    "nickname": "LTA",
+    "title": "資深刷碗師",
+    "intro": "高峰時段的救世主，碗盤如流水般來去，LTA 擁有的速度讓洗碗機都甘拜下風。",
+    "seniority": 10,
+    "hourly_rate": 195,
+    "areas": ["北部", "南部"],
+    "img_name": "LTA.jpg"
+  },
+  {
+    "id": 4,
+    "nickname": "HPW",
+    "title": "見習刷碗師",
+    "intro": "雖然只有一年的經驗，但已經磨練出如侍劍般的洗碗技藝，立志成為碗盤世界的劍豪。",
+    "seniority": 1,
+    "hourly_rate": 190,
+    "areas": ["北部"],
+    "img_name": "HPW.jpg"
   },
   {
     "id": 5,
-    "nickname": "JSM",
-    "title": "資深刷碗師",
-    "intro": "洗碗界的哲學家，15 年的經歷讓 JSM 理解到每個碗的靈魂都值得被珍視。",
-    "seniority": 15,
-    "hourly_rate": 195,
-    "areas": ["中部", "南部"]
+    "nickname": "TSK",
+    "title": "刷碗練習生",
+    "intro": "練習時長兩年半的刷碗練習生，除了刷碗還喜歡唱、跳，rap、籃球，有很多原創刷碗技術。",
+    "seniority": {
+      "$numberDecimal": "2.5"
+    },
+    "hourly_rate": 192,
+    "areas": ["中部", "南部"],
+    "img_name": "TSK.jpg"
   },
   {
     "id": 6,

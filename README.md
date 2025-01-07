@@ -85,10 +85,6 @@ TKUIMWD 團隊網站的設計風格靈感源於實際需求，整體網站以刷
     - 與 React 技術棧無縫整合，簡化數據處理流程，提升開發效率。
     - 提供靈活的索引機制與聚合框架，高效處理複雜查詢和實時數據需求。
 
-
-## Figma設計稿
-https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%E6%A1%88?node-id=109-347&t=rTCbDHushilFIjIS-0
-
 ## 規劃
 
 - ### 組件拆分
@@ -108,6 +104,7 @@ https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%
 
 ## 架構圖與流程圖
 
+![](./Images/arch-flow-chart.png)
 
 ## 分工表
 
@@ -119,3 +116,11 @@ https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%
     - Figma製作、錄製操作影片、專案討論
 - ### LTA
     - 測試網站功能、API文檔製作、專案討論
+
+## Figma設計稿
+
+https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%E6%A1%88?node-id=109-347&t=rTCbDHushilFIjIS-0
+
+## Demo
+
+https://www.youtube.com/watch?v=3nX9zXdU0LA
