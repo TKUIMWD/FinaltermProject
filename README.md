@@ -110,7 +110,7 @@ https://www.figma.com/design/V7Mk5MvzqjmhrZYJ1hd48c/%E6%9C%9F%E6%9C%AB%E5%B0%88%
 ## 分工表
 
 - ### HPW
-    - 專案討論與製作，文檔討論，專案討論
+    - 專案討論與製作，文檔討論
 - ### ZZY
     - Figma設計與製作，文檔製作，專案討論
 - ### LCH
