@@ -44,9 +44,7 @@
     "nickname": "TSK",
     "title": "刷碗練習生",
     "intro": "練習時長兩年半的刷碗練習生，除了刷碗還喜歡唱、跳，rap、籃球，有很多原創刷碗技術。",
-    "seniority": {
-      "$numberDecimal": "2.5"
-    },
+    "seniority": 2.5,
     "hourly_rate": 192,
     "areas": ["中部", "南部"],
     "img_name": "TSK.jpg"
