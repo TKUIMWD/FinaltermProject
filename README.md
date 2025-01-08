@@ -38,6 +38,18 @@ cd Backend
 npm install
 npm run dev
 ```
+
+### 資料庫
+
+MongoDB 需配置以下 Collections
+
+- admins
+    > 自行新增管理員帳號 : username : {USERNAME} , password_hash : {BCRYPT_HASH}
+- dish_washers
+    > 可以匯入範例刷碗工資料 [dishwashers.json](dishwashers.json)
+- reservations
+- users
+
 ## 主題
 
 ### DWRP - Dish Washer Reserve Platform 預約刷碗工到府刷碗平台
